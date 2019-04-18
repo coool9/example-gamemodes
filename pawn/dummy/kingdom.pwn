@@ -9,12 +9,12 @@
 
 // ------------------------------------------------------------------------------------------------------------
 
-#define	COLOR_WHITE								(0xFFFFFFFF)
+#define	COLOR_WHITE							(0xFFFFFFFF)
 #define	COLOR_ORANGE							(0xFFA500FF)
 #define	COLOR_LIGHTBLUE							(0xADD8E6FF)
 #define	COLOR_YELLOW							(0xFFFF00FF)
 
-#define	COLOR_ERROR								(0xD3D3D3FF)
+#define	COLOR_ERROR							(0xD3D3D3FF)
 
 #define	COLOR_TEAM_GROVE						(0x33AA33FF)
 #define	COLOR_TEAM_LSVAGOS						(0xB8860BFF)
@@ -27,10 +27,10 @@
 #define	MAX_TEAM_SKINS							(6)
 #define	STARTING_MONEY							(20000)
 #define	MONEY_PER_KILL							(5000)
-#define	VEHICLE_RESPAWN_TIME					(60) // In seconds
+#define	VEHICLE_RESPAWN_TIME						(60) // In seconds
 
-#define	GANGZONE_ATTACK_TIME					(1000 * 60 * 5)
-#define	GANGZONE_MEMBERS_NEEDED_TO_ATTACK		(1) // Minimum
+#define	GANGZONE_ATTACK_TIME						(1000 * 60 * 5)
+#define	GANGZONE_MEMBERS_NEEDED_TO_ATTACK				(1) // Minimum
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -71,24 +71,24 @@ enum E_GUNSTORE_DATA
 static
 	gTeamData[][E_TEAM_DATA] =
 	{/*
-		Name					Skins								Color					Respawn											SkinPosition (For Class Selection)*/
-		{"Grove Street",		{105, 106, 107},					COLOR_TEAM_GROVE,		{2515.2280, -1681.4805, 13.4170, 48.0854},		{2463.7131, -1667.0674, 13.4771, 86.2142}},
-		{"Los Santos Vagos",	{108, 109, 110},					COLOR_TEAM_LSVAGOS,		{2803.1096, -1183.1365, 25.5073, 264.5774},		{2855.9277, -1191.7800, 24.5803, 260.3824}},
-		{"Ballas",				{102, 103, 104},					COLOR_TEAM_BALLAS,		{1084.1046, -1211.8845, 17.8120, 276.5225},		{1114.4854, -1209.9791, 17.7987, 316.0495}},
-		{"Los Aztecas",			{114, 115, 116},					COLOR_TEAM_AZTECAS,		{315.8699, -1772.3295, 4.6857, 187.4871},		{336.2047, -1819.4639, 4.2275, 194.6938}},
-		{"Police",				{280, 281, 284, 306, 265, 266},		COLOR_TEAM_POLICE,		{1574.2010, -1634.2572, 13.5559, 0.6023},		{1519.3356, -1603.8440, 13.5469, 43.6743}}
+		Name					Skins							Color					Respawn											SkinPosition (For Class Selection)*/
+		{"Grove Street",			{105, 106, 107},					COLOR_TEAM_GROVE,			{2515.2280, -1681.4805, 13.4170, 48.0854},		{2463.7131, -1667.0674, 13.4771, 86.2142}},
+		{"Los Santos Vagos",			{108, 109, 110},					COLOR_TEAM_LSVAGOS,			{2803.1096, -1183.1365, 25.5073, 264.5774},		{2855.9277, -1191.7800, 24.5803, 260.3824}},
+		{"Ballas",				{102, 103, 104},					COLOR_TEAM_BALLAS,			{1084.1046, -1211.8845, 17.8120, 276.5225},		{1114.4854, -1209.9791, 17.7987, 316.0495}},
+		{"Los Aztecas",				{114, 115, 116},					COLOR_TEAM_AZTECAS,			{315.8699, -1772.3295, 4.6857, 187.4871},		{336.2047, -1819.4639, 4.2275, 194.6938}},
+		{"Police",				{280, 281, 284, 306, 265, 266},				COLOR_TEAM_POLICE,			{1574.2010, -1634.2572, 13.5559, 0.6023},		{1519.3356, -1603.8440, 13.5469, 43.6743}}
 	},
 	gGangZoneData[][E_GANGZONE_DATA] =
 	{/*
 		MinX					MinY					MaxX					MaxY					Name*/
 		{{1859.0,				-1263.0,				2069.0,					-1135.0},				"Park Gleen"},
 		{{1155.0,				-2085.0,				1293.0,					-1988.0},				"Mansion"},
-		{{1687.9690551757812,	-1949.9933471679688,	1811.9690551757812,		-1869.9933471679688},	"Station"},
-		{{2444.9447021484375,	-2468.2816467285156,	2554.9447021484375,		-2358.2816467285156},	"Port"}
+		{{1687.9690551757812,			-1949.9933471679688,			1811.9690551757812,			-1869.9933471679688},	"Station"},
+		{{2444.9447021484375,			-2468.2816467285156,			2554.9447021484375,			-2358.2816467285156},	"Port"}
 	},
 	gGunStoreData[][E_GUNSTORE_DATA] =
-	{																									/*
-		WeaponID		Price		Ammo																*/
+	{/*
+		WeaponID		Price		Ammo*/
 		{16,			2000,		10},	// Granade
 		{18,			2000,		10},	// Molotov
 		{22,			500,		100},	// 9mm
@@ -103,7 +103,7 @@ static
 		{31,			7000,		250},	// M4
 		{32,			5000,		300},	// Tec-9
 		{33,			3000,		30},	// Country Rifle
-		{34,			9000,		50}		// Sniper Rifle
+		{34,			9000,		50}	// Sniper Rifle
 	};
 
 static
