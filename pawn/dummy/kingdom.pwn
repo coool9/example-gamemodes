@@ -9,41 +9,41 @@
 
 // ------------------------------------------------------------------------------------------------------------
 
-#define	COLOR_WHITE 							(0xFFFFFFFF)
-#define COLOR_ORANGE 							(0xFFA500FF)
-#define COLOR_LIGHTBLUE 						(0xADD8E6FF)
-#define COLOR_YELLOW 							(0xFFFF00FF)
+#define	COLOR_WHITE								(0xFFFFFFFF)
+#define COLOR_ORANGE							(0xFFA500FF)
+#define COLOR_LIGHTBLUE							(0xADD8E6FF)
+#define COLOR_YELLOW							(0xFFFF00FF)
 
-#define COLOR_ERROR                             (0xD3D3D3FF)
+#define COLOR_ERROR								(0xD3D3D3FF)
 
-#define COLOR_TEAM_GROVE 						(0x33AA33FF)
-#define COLOR_TEAM_LSVAGOS 						(0xB8860BFF)
-#define COLOR_TEAM_BALLAS                       (0x800080FF)
-#define COLOR_TEAM_AZTECAS                      (0x3380ccFF)
-#define COLOR_TEAM_POLICE                       (0x6666ffFF)
-
-// ------------------------------------------------------------------------------------------------------------
-
-#define MAX_TEAM_SKINS 							(6)
-#define STARTING_MONEY                          (20000)
-#define MONEY_PER_KILL                          (5000)
-#define VEHICLE_RESPAWN_TIME                    (60) // In seconds
-
-#define GANGZONE_ATTACK_TIME 					(1000 * 60 * 5)
-#define GANGZONE_MEMBERS_NEEDED_TO_ATTACK 		(1) // Minimum
+#define COLOR_TEAM_GROVE						(0x33AA33FF)
+#define COLOR_TEAM_LSVAGOS						(0xB8860BFF)
+#define COLOR_TEAM_BALLAS						(0x800080FF)
+#define COLOR_TEAM_AZTECAS						(0x3380ccFF)
+#define COLOR_TEAM_POLICE						(0x6666ffFF)
 
 // ------------------------------------------------------------------------------------------------------------
 
-#define DIALOG_MESSAGE                          (1)
-#define DIALOG_GUNSTORE                         (2)
+#define MAX_TEAM_SKINS							(6)
+#define STARTING_MONEY							(20000)
+#define MONEY_PER_KILL							(5000)
+#define VEHICLE_RESPAWN_TIME					(60) // In seconds
+
+#define GANGZONE_ATTACK_TIME					(1000 * 60 * 5)
+#define GANGZONE_MEMBERS_NEEDED_TO_ATTACK		(1) // Minimum
+
+// ------------------------------------------------------------------------------------------------------------
+
+#define DIALOG_MESSAGE							(1)
+#define DIALOG_GUNSTORE							(2)
 
 // ------------------------------------------------------------------------------------------------------------
 
 enum E_TEAM_DATA
 {
-    E_TEAM_DATA_NAME[64],
-    E_TEAM_DATA_SKINS[MAX_TEAM_SKINS],
-    E_TEAM_DATA_COLOR,
+	E_TEAM_DATA_NAME[64],
+	E_TEAM_DATA_SKINS[MAX_TEAM_SKINS],
+	E_TEAM_DATA_COLOR,
 	Float:E_TEAM_DATA_RESPAWN[4],
 	Float:E_TEAM_DATA_SKIN_POS[4],
 	// Not need be defined
@@ -52,12 +52,12 @@ enum E_TEAM_DATA
 
 enum E_GANGZONE_DATA
 {
-    Float:E_GANGZONE_DATA_POS[4],
-    E_GANGZONE_DATA_NAME[64],
-    // Not need be defined
-    E_GANGZONE_DATA_ZONEID,
-    E_GANGZONE_DATA_OWNERID,
-    bool:E_GANGZONE_DATA_INWAR,
+	Float:E_GANGZONE_DATA_POS[4],
+	E_GANGZONE_DATA_NAME[64],
+	// Not need be defined
+	E_GANGZONE_DATA_ZONEID,
+	E_GANGZONE_DATA_OWNERID,
+	bool:E_GANGZONE_DATA_INWAR,
 	E_GANGZONE_DATA_ATTACKERID
 }
 
@@ -70,8 +70,8 @@ enum E_GUNSTORE_DATA
 
 static
 	gTeamData[][E_TEAM_DATA] =
-	{                                                                                                   																																																	/*
-		Name					Skins								Color					Respawn											Skin Position (For Class Selection)		                                                    																				*/
+	{																																																																										/*
+		Name					Skins								Color					Respawn											Skin Position (For Class Selection)																																*/
 		{"Grove Street",		{105, 106, 107},					COLOR_TEAM_GROVE,		{2515.2280, -1681.4805, 13.4170, 48.0854}, 		{2463.7131, -1667.0674, 13.4771, 86.2142}},
 		{"Los Santos Vagos",	{108, 109, 110},					COLOR_TEAM_LSVAGOS,		{2803.1096, -1183.1365, 25.5073, 264.5774}, 	{2855.9277, -1191.7800, 24.5803, 260.3824}},
 		{"Ballas",				{102, 103, 104},					COLOR_TEAM_BALLAS,		{1084.1046, -1211.8845, 17.8120, 276.5225}, 	{1114.4854, -1209.9791, 17.7987, 316.0495}},
@@ -80,11 +80,11 @@ static
 	},
 	gGangZoneData[][E_GANGZONE_DATA] =
 	{																																																																										/*
-	    MinX     				MinY        			MaxX        			MaxY    				Name                                                                                                                                                                                                                                                */
-	    {{1859.0, 				-1263.0, 				2069.0, 				-1135.0}, 				"Park Gleen"},
-	    {{1155.0, 				-2085.0, 				1293.0, 				-1988.0}, 				"Mansion"},
-	    {{1687.9690551757812, 	-1949.9933471679688, 	1811.9690551757812,  	-1869.9933471679688}, 	"Station"},
-	    {{2444.9447021484375, 	-2468.2816467285156, 	2554.9447021484375,  	-2358.2816467285156}, 	"Port"}
+		MinX     				MinY        			MaxX        			MaxY    				Name																																																*/
+		{{1859.0, 				-1263.0, 				2069.0, 				-1135.0}, 				"Park Gleen"},
+		{{1155.0, 				-2085.0, 				1293.0, 				-1988.0}, 				"Mansion"},
+		{{1687.9690551757812, 	-1949.9933471679688, 	1811.9690551757812,  	-1869.9933471679688}, 	"Station"},
+		{{2444.9447021484375, 	-2468.2816467285156, 	2554.9447021484375,  	-2358.2816467285156}, 	"Port"}
 	},
 	gGunStoreData[][E_GUNSTORE_DATA] =
 	{                                                                                                                                                                                                                                                                                                       /*
@@ -148,13 +148,13 @@ public OnGameModeInit()
 	{
 	    for (new i; i < MAX_TEAM_SKINS; i++)
 	    {
-	        if (gTeamData[teamid][E_TEAM_DATA_SKINS][i] == 0)
+			if (gTeamData[teamid][E_TEAM_DATA_SKINS][i] == 0)
 			{
-			    gTeamData[teamid][E_TEAM_DATA_CLASSID][i] = -1;
+				gTeamData[teamid][E_TEAM_DATA_CLASSID][i] = -1;
 				continue;
 			}
 			
- 			gTeamData[teamid][E_TEAM_DATA_CLASSID][i] = AddPlayerClassEx(teamid, gTeamData[teamid][E_TEAM_DATA_SKINS][i], gTeamData[teamid][E_TEAM_DATA_RESPAWN][0], gTeamData[teamid][E_TEAM_DATA_RESPAWN][1], gTeamData[teamid][E_TEAM_DATA_RESPAWN][2], gTeamData[teamid][E_TEAM_DATA_RESPAWN][3], 0, 0, 0, 0, 0, 0);
+			gTeamData[teamid][E_TEAM_DATA_CLASSID][i] = AddPlayerClassEx(teamid, gTeamData[teamid][E_TEAM_DATA_SKINS][i], gTeamData[teamid][E_TEAM_DATA_RESPAWN][0], gTeamData[teamid][E_TEAM_DATA_RESPAWN][1], gTeamData[teamid][E_TEAM_DATA_RESPAWN][2], gTeamData[teamid][E_TEAM_DATA_RESPAWN][3], 0, 0, 0, 0, 0, 0);
 		}
 	}
 	
@@ -162,7 +162,7 @@ public OnGameModeInit()
 	
 	for (new zoneid; zoneid < sizeof(gGangZoneData); zoneid++)
 	{
-	    gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID] = GangZoneCreate(gGangZoneData[zoneid][E_GANGZONE_DATA_POS][0], gGangZoneData[zoneid][E_GANGZONE_DATA_POS][1], gGangZoneData[zoneid][E_GANGZONE_DATA_POS][2], gGangZoneData[zoneid][E_GANGZONE_DATA_POS][3]);
+		gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID] = GangZoneCreate(gGangZoneData[zoneid][E_GANGZONE_DATA_POS][0], gGangZoneData[zoneid][E_GANGZONE_DATA_POS][1], gGangZoneData[zoneid][E_GANGZONE_DATA_POS][2], gGangZoneData[zoneid][E_GANGZONE_DATA_POS][3]);
 		gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID] = -1;
 		gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID] = -1;
 	}
@@ -229,7 +229,7 @@ public OnGameModeInit()
 	AddStaticVehicleEx(523,1560.6783,-1634.6315,13.1402,357.8896,0,1,VEHICLE_RESPAWN_TIME); // Police
 	AddStaticVehicleEx(523,1552.9863,-1634.6147,13.1375,358.8776,0,1,VEHICLE_RESPAWN_TIME); // Police
 
-    // ------------------------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------
 
 	TD_SelectTeam = TextDrawCreate(318.687194, 100.499984, "Choose your team!");
 	TextDrawLetterSize(TD_SelectTeam, 0.579910, 2.498333);
@@ -255,41 +255,41 @@ public OnPlayerRequestClass(playerid, classid)
 	        // Find the classid within the array
 	        if (classid == gTeamData[teamid][E_TEAM_DATA_CLASSID][i])
 	        {
-	        	SetPlayerPos(playerid, gTeamData[teamid][E_TEAM_DATA_SKIN_POS][0], gTeamData[teamid][E_TEAM_DATA_SKIN_POS][1], gTeamData[teamid][E_TEAM_DATA_SKIN_POS][2]);
+				SetPlayerPos(playerid, gTeamData[teamid][E_TEAM_DATA_SKIN_POS][0], gTeamData[teamid][E_TEAM_DATA_SKIN_POS][1], gTeamData[teamid][E_TEAM_DATA_SKIN_POS][2]);
 				SetPlayerFacingAngle(playerid, gTeamData[teamid][E_TEAM_DATA_SKIN_POS][3]);
 
 	        	static
 	        	    Float:x, Float:y, Float:a;
 	        	    
-	        	x = gTeamData[teamid][E_TEAM_DATA_SKIN_POS][0];
-	        	y = gTeamData[teamid][E_TEAM_DATA_SKIN_POS][1];
-	        	a = gTeamData[teamid][E_TEAM_DATA_SKIN_POS][3];
+				x = gTeamData[teamid][E_TEAM_DATA_SKIN_POS][0];
+				y = gTeamData[teamid][E_TEAM_DATA_SKIN_POS][1];
+				a = gTeamData[teamid][E_TEAM_DATA_SKIN_POS][3];
 
 				// Get XY from the front of the player (Credits for Y_Less)
-			    x += (4.0 * floatsin(-a, degrees));
-			    y += (4.0 * floatcos(-a, degrees));
+				x += (4.0 * floatsin(-a, degrees));
+				y += (4.0 * floatcos(-a, degrees));
 
 				// Set the camera in front of the skin
-			    SetPlayerCameraPos(playerid, x, y, gTeamData[teamid][E_TEAM_DATA_SKIN_POS][2]);
+				SetPlayerCameraPos(playerid, x, y, gTeamData[teamid][E_TEAM_DATA_SKIN_POS][2]);
 				SetPlayerCameraLookAt(playerid, gTeamData[teamid][E_TEAM_DATA_SKIN_POS][0], gTeamData[teamid][E_TEAM_DATA_SKIN_POS][1], gTeamData[teamid][E_TEAM_DATA_SKIN_POS][2] + 0.2);
 
 				// Saving the teamid in a variable
-	        	gPlayerTeam[playerid] = teamid;
+				gPlayerTeam[playerid] = teamid;
 	        	
-	        	// Set the team color on the player
-	        	SetPlayerColor(playerid, gTeamData[teamid][E_TEAM_DATA_COLOR]);
+				// Set the team color on the player
+				SetPlayerColor(playerid, gTeamData[teamid][E_TEAM_DATA_COLOR]);
 	        	
-	        	// Set the team name in Textdraw
-	            format(gString, sizeof gString, "%s", gTeamData[teamid][E_TEAM_DATA_NAME]);
-	            PlayerTextDrawSetString(playerid, PTD_TeamName[playerid], gString);
+				// Set the team name in Textdraw
+				format(gString, sizeof gString, "%s", gTeamData[teamid][E_TEAM_DATA_NAME]);
+				PlayerTextDrawSetString(playerid, PTD_TeamName[playerid], gString);
 	            
-	            // Set the team color in TextDraw
-	            PlayerTextDrawColor(playerid, PTD_TeamName[playerid], ((gTeamData[teamid][E_TEAM_DATA_COLOR] & ~0xAA) | 0xFF));
+				// Set the team color in TextDraw
+				PlayerTextDrawColor(playerid, PTD_TeamName[playerid], ((gTeamData[teamid][E_TEAM_DATA_COLOR] & ~0xAA) | 0xFF));
 
 				// Show TextDraw's
-            	TextDrawShowForPlayer(playerid, TD_SelectTeam);
-	            PlayerTextDrawShow(playerid, PTD_TeamName[playerid]);
-	            break;
+				TextDrawShowForPlayer(playerid, TD_SelectTeam);
+				PlayerTextDrawShow(playerid, PTD_TeamName[playerid]);
+				break;
 	        }
 	    }
     }
@@ -312,15 +312,15 @@ public OnPlayerSpawn(playerid)
 		// Show GangZone to the player
 	    GangZoneShowForPlayer(playerid, gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], GangZone_GetOwnerColor(zoneid));
 	    
-	    // Checking if the GangZone is being attacked
+		// Checking if the GangZone is being attacked
 	    if (gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR])
 	    {
 			static
-			    attackerid;
+				attackerid;
 
 			attackerid = gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID];
 			
-	        GangZoneFlashForPlayer(playerid, gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], ((gTeamData[attackerid][E_TEAM_DATA_COLOR] & ~0xFF) | 0xAA));
+			GangZoneFlashForPlayer(playerid, gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], ((gTeamData[attackerid][E_TEAM_DATA_COLOR] & ~0xFF) | 0xAA));
 			// Now the player knows that GangZone is over-attacking
 	    }
 	}
@@ -334,19 +334,19 @@ public OnPlayerSpawn(playerid)
 
 public OnPlayerConnect(playerid)
 {
-    gPlayerTimer[playerid] = SetTimerEx("OnPlayerUpdateEx", 1000, true, "i", playerid); // Create a player timer
+	gPlayerTimer[playerid] = SetTimerEx("OnPlayerUpdateEx", 1000, true, "i", playerid); // Create a player timer
 
-    gPlayerCurrentGZ[playerid] = -1; // Set the current GZ to -1 (-1 = none, avoiding bugs)
+	gPlayerCurrentGZ[playerid] = -1; // Set the current GZ to -1 (-1 = none, avoiding bugs)
     
-    GetPlayerName(playerid, gPlayerName[playerid], MAX_PLAYER_NAME + 1); // Save the player name
+	GetPlayerName(playerid, gPlayerName[playerid], MAX_PLAYER_NAME + 1); // Save the player name
     
-    SetPlayerColor(playerid, COLOR_WHITE); // Set no-team color
+	SetPlayerColor(playerid, COLOR_WHITE); // Set no-team color
     
-    SendDeathMessage(INVALID_PLAYER_ID, playerid, 200); // Notifies player connection
+	SendDeathMessage(INVALID_PLAYER_ID, playerid, 200); // Notifies player connection
 
 	GivePlayerMoney(playerid, STARTING_MONEY); // Gives the starting money
 	
-    PTD_TeamName[playerid] = CreatePlayerTextDraw(playerid, 316.626281, 367.315704, "TeamName");
+	PTD_TeamName[playerid] = CreatePlayerTextDraw(playerid, 316.626281, 367.315704, "TeamName");
 	PlayerTextDrawLetterSize(playerid, PTD_TeamName[playerid], 0.400000, 1.600000);
 	PlayerTextDrawAlignment(playerid, PTD_TeamName[playerid], 2);
 	PlayerTextDrawSetShadow(playerid, PTD_TeamName[playerid], 1);
@@ -360,21 +360,21 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerDisconnect(playerid)
 {
-    SendDeathMessage(INVALID_PLAYER_ID, playerid, 201); // Notifies player disconnection
+	SendDeathMessage(INVALID_PLAYER_ID, playerid, 201); // Notifies player disconnection
     
-    // Kill the player timer
-    if (gPlayerTimer[playerid] != -1)
-    {
-        KillTimer(gPlayerTimer[playerid]);
-        gPlayerTimer[playerid] = -1;
-    }
+	// Kill the player timer
+	if (gPlayerTimer[playerid] != -1)
+	{
+		KillTimer(gPlayerTimer[playerid]);
+		gPlayerTimer[playerid] = -1;
+	}
     
     return true;
 }
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-    SendDeathMessage(killerid, playerid, reason);
+	SendDeathMessage(killerid, playerid, reason);
     
 	if (killerid != INVALID_PLAYER_ID)
 	{
@@ -385,7 +385,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	}
 	else
 	{
-	    // Probable Suicide
+		// Probable Suicide
 	}
 	
 	return true;
@@ -404,7 +404,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		
 		for (new i; i < sizeof(gGunStoreData); i++)
 		{
-  			GetWeaponName(gGunStoreData[i][E_GUNSTORE_DATA_WEAPONID], gunName, sizeof(gunName));
+			GetWeaponName(gGunStoreData[i][E_GUNSTORE_DATA_WEAPONID], gunName, sizeof(gunName));
   			
 			format(gString, sizeof gString, "%s\t$%d\t%d\n",
 				gunName,
@@ -415,7 +415,8 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			strcat(dialog, gString);
 		}
 		
-	    ShowPlayerDialog(playerid, DIALOG_GUNSTORE, DIALOG_STYLE_TABLIST_HEADERS, "Gun Store", dialog, "Buy", "Cancel");
+		ShowPlayerDialog(playerid, DIALOG_GUNSTORE, DIALOG_STYLE_TABLIST_HEADERS, "Gun Store", dialog, "Buy", "Cancel");
+		return true;
 	}
 	
 	return true;
@@ -425,26 +426,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if (dialogid == DIALOG_GUNSTORE)
 	{
-	    if (response)
-	    {
+		if (response)
+		{
 			if (gGunStoreData[listitem][E_GUNSTORE_DATA_PRICE] > GetPlayerMoney(playerid))
 			{
-			    return  SendClientMessage(playerid, COLOR_ERROR, "[ERROR] You don't have enough money to buy it.");
+				return  SendClientMessage(playerid, COLOR_ERROR, "[ERROR] You don't have enough money to buy it.");
 			}
 			
 			GivePlayerWeapon(playerid, gGunStoreData[listitem][E_GUNSTORE_DATA_WEAPONID], gGunStoreData[listitem][E_GUNSTORE_DATA_AMMO]);
 			GivePlayerMoney(playerid, -gGunStoreData[listitem][E_GUNSTORE_DATA_PRICE]);
 
 			static
-			    gunName[32];
+				gunName[32];
 
-            GetWeaponName(gGunStoreData[listitem][E_GUNSTORE_DATA_WEAPONID], gunName, sizeof(gunName));
+			GetWeaponName(gGunStoreData[listitem][E_GUNSTORE_DATA_WEAPONID], gunName, sizeof(gunName));
             
-            format(gString, sizeof gString, "** You bought an %s with %d ammo.", gunName, gGunStoreData[listitem][E_GUNSTORE_DATA_AMMO]);
-            SendClientMessage(playerid, COLOR_LIGHTBLUE, gString);
+			format(gString, sizeof gString, "** You bought an %s with %d ammo.", gunName, gGunStoreData[listitem][E_GUNSTORE_DATA_AMMO]);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, gString);
 		}
 	    
-	    return true;
+		return true;
 	}
 
 	return false;
@@ -452,7 +453,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 public OnPlayerText(playerid, text[])
 {
-    SetPlayerChatBubble(playerid, text, COLOR_WHITE, 100.0, 10000);
+	SetPlayerChatBubble(playerid, text, COLOR_WHITE, 100.0, 10000);
     
 	format(gString, sizeof gString, "%s (%d): {FFFFFF}%s", gPlayerName[playerid], playerid, text);
 	SendClientMessageToAll(GetPlayerColor(playerid), gString);
@@ -468,41 +469,41 @@ public OnPlayerCommandText(playerid, cmdtext[])
 	        
 		zoneid = gPlayerCurrentGZ[playerid];
 	        
-	    if (zoneid == -1)
+		if (zoneid == -1)
 	    {
 	        return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] You need to be inside a territory to do this.");
 	    }
 	    
 		if (gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR])
 		{
-		    return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] The territory is already over-attacking.");
+			return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] The territory is already over-attacking.");
 		}
 		
 		if (gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID] == gPlayerTeam[playerid])
 		{
-		    return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] This territory already belongs to your team.");
+			return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] This territory already belongs to your team.");
 		}
 	
 		if (Team_GetNearbyMembers(playerid) < GANGZONE_MEMBERS_NEEDED_TO_ATTACK)
 		{
 			format(gString, sizeof gString, "[ERROR] You need %d teammates nearby to attack territories.", GANGZONE_MEMBERS_NEEDED_TO_ATTACK);
-		    return SendClientMessage(playerid, COLOR_ERROR, gString);
+			return SendClientMessage(playerid, COLOR_ERROR, gString);
 		}
 
 		static
-		    attackerid;
+			attackerid;
 
-        attackerid = gPlayerTeam[playerid];
+		attackerid = gPlayerTeam[playerid];
 
 		gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR] = true;
 		gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID] = attackerid;
 
-     	GangZoneFlashForPlayer(playerid, gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], ((gTeamData[ attackerid ][E_TEAM_DATA_COLOR] & ~0xFF) | 0xAA));
+		GangZoneFlashForPlayer(playerid, gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], ((gTeamData[ attackerid ][E_TEAM_DATA_COLOR] & ~0xFF) | 0xAA));
 
-       	format(gString, sizeof gString, "%s and his %s mates started an attack on %s territory!", gPlayerName[playerid], gTeamData[attackerid][E_TEAM_DATA_NAME], gGangZoneData[zoneid][E_GANGZONE_DATA_NAME]);
-       	SendClientMessageToAll(COLOR_ORANGE, gString);
+		format(gString, sizeof gString, "%s and his %s mates started an attack on %s territory!", gPlayerName[playerid], gTeamData[attackerid][E_TEAM_DATA_NAME], gGangZoneData[zoneid][E_GANGZONE_DATA_NAME]);
+		SendClientMessageToAll(COLOR_ORANGE, gString);
        	
-       	SetTimerEx("FinishGangZoneWar", GANGZONE_ATTACK_TIME, false, "i", zoneid);
+		SetTimerEx("FinishGangZoneWar", GANGZONE_ATTACK_TIME, false, "i", zoneid);
 		return true;
 	}
 	
@@ -515,8 +516,8 @@ public OnPlayerEnterGangZone(playerid, zoneid)
 	{
 	    if (gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID] != -1)
 	    {
-	        static
-	            teamid;
+			static
+				teamid;
 	            
 			teamid = gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID];
 			
@@ -526,7 +527,7 @@ public OnPlayerEnterGangZone(playerid, zoneid)
 		else
 		{
 			format(gString, sizeof gString, "** The %s territory belongs to no one, to dominate enter '/dominate'", gGangZoneData[zoneid][E_GANGZONE_DATA_NAME]);
-		    SendClientMessage(playerid, COLOR_LIGHTBLUE, gString);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, gString);
 		}
 	}
 }
@@ -556,21 +557,21 @@ public FinishGangZoneWar(zoneid)
 			        
 			        static
 			            ownerid;
-			            
+
 					ownerid = gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID];
 
 			        format(gString, sizeof gString, "The %s team dominated the %s territory.", gTeamData[ownerid][E_TEAM_DATA_NAME], gGangZoneData[zoneid][E_GANGZONE_DATA_NAME]);
 			        SendClientMessageToAll(COLOR_ORANGE, gString);
-                    return true;
+					return true;
 			    }
 			}
 		}
 	}
 	
 	// If not, failure
-    GangZoneShowForAll(gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], GangZone_GetOwnerColor(zoneid));
+	GangZoneShowForAll(gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], GangZone_GetOwnerColor(zoneid));
     
-    static
+	static
 		attackerid;
 
 	attackerid = gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID];
@@ -578,34 +579,33 @@ public FinishGangZoneWar(zoneid)
 	gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID] = -1;
 	gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR] = false;
 	
-    format(gString, sizeof gString, "The %s team didn't succeed when trying to dominate the territory %s.", gTeamData[attackerid][E_TEAM_DATA_NAME], gGangZoneData[zoneid][E_GANGZONE_DATA_NAME]);
- 	SendClientMessageToAll(COLOR_ORANGE, gString);
-    return true;
+	format(gString, sizeof gString, "The %s team didn't succeed when trying to dominate the territory %s.", gTeamData[attackerid][E_TEAM_DATA_NAME], gGangZoneData[zoneid][E_GANGZONE_DATA_NAME]);
+	SendClientMessageToAll(COLOR_ORANGE, gString);
+	return true;
 }
 
 public OnPlayerUpdateEx(playerid)
 {
-    // ------------------------------------------------------------------------------------------------------------
-    // Using the Streamer plugin, this could all be replaced by Callback OnPlayerEnterDynamicArea
+	// ------------------------------------------------------------------------------------------------------------
+	// Using the Streamer plugin, this could all be replaced by Callback OnPlayerEnterDynamicArea
 	static
 		bool:leaveZone;
 
-    leaveZone = true;
+	leaveZone = true;
     
-    for (new zoneid; zoneid < sizeof(gGangZoneData); zoneid++)
-    {
-    	if (GangZone_IsPlayerIn(zoneid, playerid))
-     	{
-     	    leaveZone = false;
-     	    if (gPlayerCurrentGZ[playerid] != zoneid)
-     	    {
-	      		gPlayerCurrentGZ[playerid] = zoneid;
-	      		CallLocalFunction("OnPlayerEnterGangZone", "dd", playerid, zoneid);
+	for (new zoneid; zoneid < sizeof(gGangZoneData); zoneid++)
+	{
+		if (GangZone_IsPlayerIn(zoneid, playerid))
+		{
+			leaveZone = false;
+			if (gPlayerCurrentGZ[playerid] != zoneid)
+			{
+				gPlayerCurrentGZ[playerid] = zoneid;
+				CallLocalFunction("OnPlayerEnterGangZone", "dd", playerid, zoneid);
 			}
 		}
-    }
+	}
 
-	
 	if (leaveZone)
 	{
 	    gPlayerCurrentGZ[playerid] = -1;
@@ -629,49 +629,49 @@ Player_GiveSpawnWeapons(playerid)
 	GivePlayerWeapon(playerid, 24, 100); // Deagle
 
 	// Silver
- 	if (pScore >= 10)
+	if (pScore >= 10)
  	{
- 	    GivePlayerWeapon(playerid, 24, 30); // Shotgun
- 	    GivePlayerWeapon(playerid, 16, 5); // Granade
- 	    GivePlayerWeapon(playerid, 18, 5); // Molotov
- 	}
- 	else
- 	{
- 	    return SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Bronze Rank armaments.");
-	 }
+		GivePlayerWeapon(playerid, 24, 30); // Shotgun
+		GivePlayerWeapon(playerid, 16, 5); // Granade
+		GivePlayerWeapon(playerid, 18, 5); // Molotov
+	}
+	else
+	{
+		return SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Bronze Rank armaments.");
+	}
 
 	// Gold
- 	if (pScore >= 30)
- 	{
- 		GivePlayerWeapon(playerid, 29, 300); // MP5
- 	    GivePlayerWeapon(playerid, 30, 200); // Ak-47
- 	    GivePlayerWeapon(playerid, 4, 1); // Knife
- 	}
- 	else
- 	{
- 	    return SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Silver Rank armaments.");
- 	}
+	if (pScore >= 30)
+	{
+		GivePlayerWeapon(playerid, 29, 300); // MP5
+		GivePlayerWeapon(playerid, 30, 200); // Ak-47
+		GivePlayerWeapon(playerid, 4, 1); // Knife
+	}
+	else
+	{
+		return SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Silver Rank armaments.");
+	}
 
 	// Platine
- 	if (pScore >= 80)
+	if (pScore >= 80)
  	{
- 	    GivePlayerWeapon(playerid, 32, 300); // Tec9
- 	}
- 	else
- 	{
- 	    return SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Gold Rank armaments.");
- 	}
+		GivePlayerWeapon(playerid, 32, 300); // Tec9
+	}
+	else
+	{
+		return SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Gold Rank armaments.");
+	}
 
 	// Diamond
- 	if (pScore >= 200)
- 	{
- 	    GivePlayerWeapon(playerid, 34, 10); // Sniper
- 	    SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Diamond Rank armaments.");
- 	}
- 	else
- 	{
- 	    SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Platine Rank armaments.");
- 	}
+	if (pScore >= 200)
+	{
+		GivePlayerWeapon(playerid, 34, 10); // Sniper
+		SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Diamond Rank armaments.");
+	}
+	else
+	{
+		SendClientMessage(playerid, COLOR_YELLOW, "[SPAWN] You have received the Platine Rank armaments.");
+	}
 
 	return true;
 }
@@ -680,39 +680,39 @@ Player_GiveSpawnWeapons(playerid)
 
 GangZone_IsPlayerIn(zoneid, playerid)
 {
-    if (GetPlayerState(playerid) == PLAYER_STATE_SPECTATING || (zoneid < 0 || zoneid >= sizeof gGangZoneData))
-    {
-        return false;
-    }
+	if (GetPlayerState(playerid) == PLAYER_STATE_SPECTATING || (zoneid < 0 || zoneid >= sizeof gGangZoneData))
+	{
+		return false;
+	}
     
-    static
+	static
 		Float:x, Float:y, Float:z;
 		
-    GetPlayerPos(playerid, x, y, z);
-    return (x > gGangZoneData[zoneid][E_GANGZONE_DATA_POS][0] && x < gGangZoneData[zoneid][E_GANGZONE_DATA_POS][2] && y > gGangZoneData[zoneid][E_GANGZONE_DATA_POS][1] && y < gGangZoneData[zoneid][E_GANGZONE_DATA_POS][3]);
+	GetPlayerPos(playerid, x, y, z);
+	return (x > gGangZoneData[zoneid][E_GANGZONE_DATA_POS][0] && x < gGangZoneData[zoneid][E_GANGZONE_DATA_POS][2] && y > gGangZoneData[zoneid][E_GANGZONE_DATA_POS][1] && y < gGangZoneData[zoneid][E_GANGZONE_DATA_POS][3]);
 
 }
 
 GangZone_GetOwnerColor(zoneid)
 {
-    if (zoneid < 0 || zoneid >= sizeof gGangZoneData)
-    {
-        return false;
-    }
+	if (zoneid < 0 || zoneid >= sizeof gGangZoneData)
+	{
+		return false;
+	}
     
 	static
-	    ownerid,
-	    color;
+		ownerid,
+		color;
 
 	ownerid = gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID];
 
 	if (ownerid == -1)
 	{
-	    color = COLOR_WHITE;
+		color = COLOR_WHITE;
 	}
 	else
 	{
-	    color = gTeamData[ownerid][E_TEAM_DATA_COLOR];
+		color = gTeamData[ownerid][E_TEAM_DATA_COLOR];
 	}
 
 	return ((color & ~0xFF) | 0xAA);
@@ -724,10 +724,10 @@ GangZone_GetOwnerColor(zoneid)
 Team_GetNearbyMembers(playerid)
 {
 	static
-	    count,
-	    Float:x,
-	    Float:y,
-	    Float:z;
+		count,
+		Float:x,
+		Float:y,
+		Float:z;
 	    
 	count = 0;
 	
@@ -736,16 +736,16 @@ Team_GetNearbyMembers(playerid)
 	    if (IsPlayerConnected(i) && GetPlayerState(i) != PLAYER_STATE_SPECTATING)
 	    {
 	        if (gPlayerTeam[playerid] == gPlayerTeam[i])
-	        {
+			{
 				GetPlayerPos(playerid, x, y, z);
 				if (IsPlayerInRangeOfPoint(i, 20.0, x, y, z))
 				{
-				    count++;
+					count++;
 				}
 			}
-	    }
+		}
 	}
-	
+
 	return count;
 }
 
