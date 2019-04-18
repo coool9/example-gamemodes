@@ -10,27 +10,27 @@
 // ------------------------------------------------------------------------------------------------------------
 
 #define	COLOR_WHITE								(0xFFFFFFFF)
-#define COLOR_ORANGE							(0xFFA500FF)
-#define COLOR_LIGHTBLUE							(0xADD8E6FF)
-#define COLOR_YELLOW							(0xFFFF00FF)
+#define	COLOR_ORANGE							(0xFFA500FF)
+#define	COLOR_LIGHTBLUE							(0xADD8E6FF)
+#define	COLOR_YELLOW							(0xFFFF00FF)
 
-#define COLOR_ERROR								(0xD3D3D3FF)
+#define	COLOR_ERROR								(0xD3D3D3FF)
 
-#define COLOR_TEAM_GROVE						(0x33AA33FF)
-#define COLOR_TEAM_LSVAGOS						(0xB8860BFF)
-#define COLOR_TEAM_BALLAS						(0x800080FF)
-#define COLOR_TEAM_AZTECAS						(0x3380ccFF)
-#define COLOR_TEAM_POLICE						(0x6666ffFF)
+#define	COLOR_TEAM_GROVE						(0x33AA33FF)
+#define	COLOR_TEAM_LSVAGOS						(0xB8860BFF)
+#define	COLOR_TEAM_BALLAS						(0x800080FF)
+#define	COLOR_TEAM_AZTECAS						(0x3380ccFF)
+#define	COLOR_TEAM_POLICE						(0x6666ffFF)
 
-// ------------------------------------------------------------------------------------------------------------
+//	------------------------------------------------------------------------------------------------------------
 
-#define MAX_TEAM_SKINS							(6)
-#define STARTING_MONEY							(20000)
-#define MONEY_PER_KILL							(5000)
-#define VEHICLE_RESPAWN_TIME					(60) // In seconds
+#define	MAX_TEAM_SKINS							(6)
+#define	STARTING_MONEY							(20000)
+#define	MONEY_PER_KILL							(5000)
+#define	VEHICLE_RESPAWN_TIME					(60) // In seconds
 
-#define GANGZONE_ATTACK_TIME					(1000 * 60 * 5)
-#define GANGZONE_MEMBERS_NEEDED_TO_ATTACK		(1) // Minimum
+#define	GANGZONE_ATTACK_TIME					(1000 * 60 * 5)
+#define	GANGZONE_MEMBERS_NEEDED_TO_ATTACK		(1) // Minimum
 
 // ------------------------------------------------------------------------------------------------------------
 
@@ -70,40 +70,40 @@ enum E_GUNSTORE_DATA
 
 static
 	gTeamData[][E_TEAM_DATA] =
-	{																																																																										/*
-		Name					Skins								Color					Respawn											Skin Position (For Class Selection)																																*/
-		{"Grove Street",		{105, 106, 107},					COLOR_TEAM_GROVE,		{2515.2280, -1681.4805, 13.4170, 48.0854}, 		{2463.7131, -1667.0674, 13.4771, 86.2142}},
-		{"Los Santos Vagos",	{108, 109, 110},					COLOR_TEAM_LSVAGOS,		{2803.1096, -1183.1365, 25.5073, 264.5774}, 	{2855.9277, -1191.7800, 24.5803, 260.3824}},
-		{"Ballas",				{102, 103, 104},					COLOR_TEAM_BALLAS,		{1084.1046, -1211.8845, 17.8120, 276.5225}, 	{1114.4854, -1209.9791, 17.7987, 316.0495}},
-		{"Los Aztecas",			{114, 115, 116},					COLOR_TEAM_AZTECAS,		{315.8699, -1772.3295, 4.6857, 187.4871}, 		{336.2047, -1819.4639, 4.2275, 194.6938}},
-        {"Police",				{280, 281, 284, 306, 265, 266},		COLOR_TEAM_POLICE,		{1574.2010, -1634.2572, 13.5559, 0.6023}, 		{1519.3356, -1603.8440, 13.5469, 43.6743}}
+	{/*
+		Name					Skins								Color					Respawn											SkinPosition (For Class Selection)*/
+		{"Grove Street",		{105, 106, 107},					COLOR_TEAM_GROVE,		{2515.2280, -1681.4805, 13.4170, 48.0854},		{2463.7131, -1667.0674, 13.4771, 86.2142}},
+		{"Los Santos Vagos",	{108, 109, 110},					COLOR_TEAM_LSVAGOS,		{2803.1096, -1183.1365, 25.5073, 264.5774},		{2855.9277, -1191.7800, 24.5803, 260.3824}},
+		{"Ballas",				{102, 103, 104},					COLOR_TEAM_BALLAS,		{1084.1046, -1211.8845, 17.8120, 276.5225},		{1114.4854, -1209.9791, 17.7987, 316.0495}},
+		{"Los Aztecas",			{114, 115, 116},					COLOR_TEAM_AZTECAS,		{315.8699, -1772.3295, 4.6857, 187.4871},		{336.2047, -1819.4639, 4.2275, 194.6938}},
+		{"Police",				{280, 281, 284, 306, 265, 266},		COLOR_TEAM_POLICE,		{1574.2010, -1634.2572, 13.5559, 0.6023},		{1519.3356, -1603.8440, 13.5469, 43.6743}}
 	},
 	gGangZoneData[][E_GANGZONE_DATA] =
-	{																																																																										/*
-		MinX     				MinY        			MaxX        			MaxY    				Name																																																*/
-		{{1859.0, 				-1263.0, 				2069.0, 				-1135.0}, 				"Park Gleen"},
-		{{1155.0, 				-2085.0, 				1293.0, 				-1988.0}, 				"Mansion"},
-		{{1687.9690551757812, 	-1949.9933471679688, 	1811.9690551757812,  	-1869.9933471679688}, 	"Station"},
-		{{2444.9447021484375, 	-2468.2816467285156, 	2554.9447021484375,  	-2358.2816467285156}, 	"Port"}
+	{/*
+		MinX					MinY					MaxX					MaxY					Name*/
+		{{1859.0,				-1263.0,				2069.0,					-1135.0},				"Park Gleen"},
+		{{1155.0,				-2085.0,				1293.0,					-1988.0},				"Mansion"},
+		{{1687.9690551757812,	-1949.9933471679688,	1811.9690551757812,		-1869.9933471679688},	"Station"},
+		{{2444.9447021484375,	-2468.2816467285156,	2554.9447021484375,		-2358.2816467285156},	"Port"}
 	},
 	gGunStoreData[][E_GUNSTORE_DATA] =
-	{                                                                                                                                                                                                                                                                                                       /*
-		WeaponID	Price		Ammo                     																																																											*/
-		{16, 		2000,		10}, 	// Granade
-		{18, 		2000,		10}, 	// Molotov
-		{22,        500,		100}, 	// 9mm
-		{23,        500,		100}, 	// Silecend 9mm
-		{24,        3000,		100}, 	// Deagle
-		{25,        3000,		50}, 	// Shotgun,
-		{26,        5000,		100}, 	// Sawnoff Shotgun
-		{27,       	5000,		100}, 	// Combat Shotgun
-		{28,       	5000,		300}, 	// Micro SMG/Uzi
-		{29,        5000,		300}, 	// MP5
-		{30,        7000,		250}, 	// AK-47
-		{31,        7000,		250}, 	// M4
-		{32,        5000,		300}, 	// Tec-9
-		{33,        3000,		30}, 	// Country Rifle
-		{34,        9000,		50} 	// Sniper Rifle
+	{																									/*
+		WeaponID		Price		Ammo																*/
+		{16,			2000,		10},	// Granade
+		{18,			2000,		10},	// Molotov
+		{22,			500,		100},	// 9mm
+		{23,			500,		100},	// Silecend 9mm
+		{24,			3000,		100},	// Deagle
+		{25,			3000,		50},	// Shotgun,
+		{26,			5000,		100},	// Sawnoff Shotgun
+		{27,			5000,		100},	// Combat Shotgun
+		{28,			5000,		300},	// Micro SMG/Uzi
+		{29,			5000,		300},	// MP5
+		{30,			7000,		250},	// AK-47
+		{31,			7000,		250},	// M4
+		{32,			5000,		300},	// Tec-9
+		{33,			3000,		30},	// Country Rifle
+		{34,			9000,		50}		// Sniper Rifle
 	};
 
 static
@@ -247,19 +247,19 @@ public OnGameModeInit()
 public OnPlayerRequestClass(playerid, classid)
 {
 	// Looping all teams
-    for (new teamid; teamid < sizeof(gTeamData); teamid++)
-    {
-        // Looping all teams skins
-        for (new i; i < MAX_TEAM_SKINS; i++)
-	    {
-	        // Find the classid within the array
-	        if (classid == gTeamData[teamid][E_TEAM_DATA_CLASSID][i])
-	        {
+	for (new teamid; teamid < sizeof(gTeamData); teamid++)
+	{
+		// Looping all teams skins
+		for (new i; i < MAX_TEAM_SKINS; i++)
+		{
+			// Find the classid within the array
+			if (classid == gTeamData[teamid][E_TEAM_DATA_CLASSID][i])
+			{
 				SetPlayerPos(playerid, gTeamData[teamid][E_TEAM_DATA_SKIN_POS][0], gTeamData[teamid][E_TEAM_DATA_SKIN_POS][1], gTeamData[teamid][E_TEAM_DATA_SKIN_POS][2]);
 				SetPlayerFacingAngle(playerid, gTeamData[teamid][E_TEAM_DATA_SKIN_POS][3]);
 
-	        	static
-	        	    Float:x, Float:y, Float:a;
+				static
+					Float:x, Float:y, Float:a;
 	        	    
 				x = gTeamData[teamid][E_TEAM_DATA_SKIN_POS][0];
 				y = gTeamData[teamid][E_TEAM_DATA_SKIN_POS][1];
@@ -290,9 +290,9 @@ public OnPlayerRequestClass(playerid, classid)
 				TextDrawShowForPlayer(playerid, TD_SelectTeam);
 				PlayerTextDrawShow(playerid, PTD_TeamName[playerid]);
 				break;
-	        }
-	    }
-    }
+			}
+		}
+	}
 
 	return true;
 }
@@ -310,11 +310,11 @@ public OnPlayerSpawn(playerid)
 	for (new zoneid; zoneid < sizeof(gGangZoneData); zoneid++)
 	{
 		// Show GangZone to the player
-	    GangZoneShowForPlayer(playerid, gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], GangZone_GetOwnerColor(zoneid));
-	    
+		GangZoneShowForPlayer(playerid, gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], GangZone_GetOwnerColor(zoneid));
+
 		// Checking if the GangZone is being attacked
-	    if (gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR])
-	    {
+		if (gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR])
+		{
 			static
 				attackerid;
 
@@ -322,7 +322,7 @@ public OnPlayerSpawn(playerid)
 			
 			GangZoneFlashForPlayer(playerid, gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], ((gTeamData[attackerid][E_TEAM_DATA_COLOR] & ~0xFF) | 0xAA));
 			// Now the player knows that GangZone is over-attacking
-	    }
+		}
 	}
 	
 	Player_GiveSpawnWeapons(playerid);
@@ -464,21 +464,21 @@ public OnPlayerCommandText(playerid, cmdtext[])
 {
 	if (strcmp("/dominate", cmdtext, true, 10) == 0)
 	{
-	    static
-	        zoneid;
-	        
+		static
+			zoneid;
+    
 		zoneid = gPlayerCurrentGZ[playerid];
 	        
 		if (zoneid == -1)
-	    {
-	        return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] You need to be inside a territory to do this.");
-	    }
-	    
+		{
+			return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] You need to be inside a territory to do this.");
+		}
+
 		if (gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR])
 		{
 			return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] The territory is already over-attacking.");
 		}
-		
+
 		if (gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID] == gPlayerTeam[playerid])
 		{
 			return SendClientMessage(playerid, COLOR_ERROR, "[ERROR] This territory already belongs to your team.");
@@ -514,11 +514,11 @@ public OnPlayerEnterGangZone(playerid, zoneid)
 {
 	if (!gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR])
 	{
-	    if (gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID] != -1)
-	    {
+		if (gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID] != -1)
+		{
 			static
 				teamid;
-	            
+    
 			teamid = gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID];
 			
 			format(gString, sizeof gString, "** The %s territory belongs to the %s team, to dominate enter '/dominate'", gGangZoneData[zoneid][E_GANGZONE_DATA_NAME], gTeamData[teamid][E_TEAM_DATA_NAME]);
@@ -534,36 +534,36 @@ public OnPlayerEnterGangZone(playerid, zoneid)
 
 public FinishGangZoneWar(zoneid)
 {
-    GangZoneHideForAll(gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID]);
-    
+	GangZoneHideForAll(gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID]);
+
 	// If the team that attacked has any member within the territory, success.
 	// Looping all players
 	for (new i; i < MAX_PLAYERS; i++)
 	{
-	    // Checking if the playerid is valid
+		// Checking if the playerid is valid
 		if (IsPlayerConnected(i))
 		{
-		    // Checking if the player is from the same team that is attacking the territory
-		    if (gPlayerTeam[i] == gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID])
-		    {
-		        // Checking now if the player is inside the territory
-			    if (GangZone_IsPlayerIn(zoneid, i))
-			    {
-			        gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID] = gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID];
-			        gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID] = -1;
-			        gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR] = false;
+			// Checking if the player is from the same team that is attacking the territory
+			if (gPlayerTeam[i] == gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID])
+			{
+				// Checking now if the player is inside the territory
+				if (GangZone_IsPlayerIn(zoneid, i))
+				{
+					gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID] = gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID];
+					gGangZoneData[zoneid][E_GANGZONE_DATA_ATTACKERID] = -1;
+					gGangZoneData[zoneid][E_GANGZONE_DATA_INWAR] = false;
 
-			        GangZoneShowForAll(gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], GangZone_GetOwnerColor(zoneid));
-			        
-			        static
-			            ownerid;
+					GangZoneShowForAll(gGangZoneData[zoneid][E_GANGZONE_DATA_ZONEID], GangZone_GetOwnerColor(zoneid));
+
+					static
+						ownerid;
 
 					ownerid = gGangZoneData[zoneid][E_GANGZONE_DATA_OWNERID];
 
-			        format(gString, sizeof gString, "The %s team dominated the %s territory.", gTeamData[ownerid][E_TEAM_DATA_NAME], gGangZoneData[zoneid][E_GANGZONE_DATA_NAME]);
-			        SendClientMessageToAll(COLOR_ORANGE, gString);
+					format(gString, sizeof gString, "The %s team dominated the %s territory.", gTeamData[ownerid][E_TEAM_DATA_NAME], gGangZoneData[zoneid][E_GANGZONE_DATA_NAME]);
+					SendClientMessageToAll(COLOR_ORANGE, gString);
 					return true;
-			    }
+				}
 			}
 		}
 	}
@@ -620,7 +620,7 @@ public OnPlayerUpdateEx(playerid)
 
 Player_GiveSpawnWeapons(playerid)
 {
-    static
+	static
 		pScore;
 
 	pScore = GetPlayerScore(playerid);
@@ -684,7 +684,7 @@ GangZone_IsPlayerIn(zoneid, playerid)
 	{
 		return false;
 	}
-    
+
 	static
 		Float:x, Float:y, Float:z;
 		
@@ -733,9 +733,9 @@ Team_GetNearbyMembers(playerid)
 	
 	for (new i; i < MAX_PLAYERS; i++)
 	{
-	    if (IsPlayerConnected(i) && GetPlayerState(i) != PLAYER_STATE_SPECTATING)
-	    {
-	        if (gPlayerTeam[playerid] == gPlayerTeam[i])
+		if (IsPlayerConnected(i) && GetPlayerState(i) != PLAYER_STATE_SPECTATING)
+		{
+			if (gPlayerTeam[playerid] == gPlayerTeam[i])
 			{
 				GetPlayerPos(playerid, x, y, z);
 				if (IsPlayerInRangeOfPoint(i, 20.0, x, y, z))
