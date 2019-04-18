@@ -1,0 +1,12 @@
+{
+	"user": "openmultiplayer",
+	"repo": "kingdom-compat",
+	"entry": "kingdom.pwn",
+	"output": "kingdom.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib"
+	],
+	"contributors": [
+		"CaioTJF"
+	]
+}
