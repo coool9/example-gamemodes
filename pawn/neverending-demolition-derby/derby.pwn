@@ -3,13 +3,13 @@
 */
 #include <a_samp>
 
-#define	COLOR_WHITE							 (0xFFFFFFFF)
-#define COLOR_RIGHTGRAY						 (0xAAAAAAFF)
+#define	COLOR_WHITE                          (0xFFFFFFFF)
+#define COLOR_RIGHTGRAY                      (0xAAAAAAFF)
 
-#define COL_WHITE							 "{FFFFFF}"
-#define COL_LIGHTGRAY						 "{AAAAAA}"
+#define COL_WHITE                            "{FFFFFF}"
+#define COL_LIGHTGRAY                        "{AAAAAA}"
 
-#define DERBY_MIN_Z							 (98.8186)
+#define DERBY_MIN_Z                          (98.8186)
 #define DERBY_VEHICLE_CHANGE_AFTER_X_MINUTES (10)
 
 forward DerbyBoundsTimer();
