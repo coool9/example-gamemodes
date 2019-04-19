@@ -146,8 +146,8 @@ public OnGameModeInit()
 	
 	for (new teamid; teamid < sizeof(gTeamData); teamid++)
 	{
-	    for (new i; i < MAX_TEAM_SKINS; i++)
-	    {
+		for (new i; i < MAX_TEAM_SKINS; i++)
+	    	{
 			if (gTeamData[teamid][E_TEAM_DATA_SKINS][i] == 0)
 			{
 				gTeamData[teamid][E_TEAM_DATA_CLASSID][i] = -1;
@@ -728,7 +728,8 @@ Team_GetNearbyMembers(playerid)
 		Float:x,
 		Float:y,
 		Float:z;
-	    
+	
+	GetPlayerPos(playerid, x, y, z);
 	count = 0;
 	
 	for (new i; i < MAX_PLAYERS; i++)
@@ -737,7 +738,6 @@ Team_GetNearbyMembers(playerid)
 		{
 			if (gPlayerTeam[playerid] == gPlayerTeam[i])
 			{
-				GetPlayerPos(playerid, x, y, z);
 				if (IsPlayerInRangeOfPoint(i, 20.0, x, y, z))
 				{
 					count++;
