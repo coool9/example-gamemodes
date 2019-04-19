@@ -160,7 +160,8 @@ public OnPlayerSpawn(playerid)
         vehicle_spawn_cycle = 0,
         total_vehicle_spawn_pos = sizeof(gDerbyVehicleSpawnPos)
     ;
-    if(vehicle_spawn_cycle++ >= total_vehicle_spawn_pos - 1) {
+    if(vehicle_spawn_cycle++ >= total_vehicle_spawn_pos - 1)
+    {
         vehicle_spawn_cycle = 0;
     }
     gPlayerVehicleID[playerid] = AddStaticVehicleEx
@@ -188,7 +189,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 public OnPlayerStateChange(playerid, newstate, oldstate)
 {
     // Put the player back in their vehicle if they decice to exit it
-    if(oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT) {
+    if(oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT)
+    {
         PutPlayerInVehicle(playerid, gPlayerVehicleID[playerid], 0);
     }
     return true;
@@ -196,7 +198,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 
 public OnPlayerCommandText(playerid, cmdtext[])
 {
-    if(strcmp("/kill", cmdtext, true, 5) == 0) {
+    if(strcmp("/kill", cmdtext, true, 5) == 0)
+    {
         SetPlayerHealth(playerid, -1.0);
     }
     else
@@ -211,13 +214,16 @@ public DerbyBoundsTimer()
 {
     for(new i = 0, len = GetPlayerPoolSize(), Float:z; i <= len; i++)
     {
-        if(gPlayerVehicleID[i] == INVALID_VEHICLE_ID) {
+        if(gPlayerVehicleID[i] == INVALID_VEHICLE_ID)
+        {
             continue;
         }
-        if(!GetPlayerPos(i, z, z, z)) { // IsPlayerConnected (check if the player is valid) + get z pos
+        if(!GetPlayerPos(i, z, z, z)) // IsPlayerConnected (check if the player is valid) + get z pos
+        {
             continue;
         }
-        if(z > DERBY_MIN_Z) {
+        if(z > DERBY_MIN_Z)
+        {
             continue;
         }
         SetVehicleHealth(gPlayerVehicleID[i], -1.0);
@@ -232,7 +238,8 @@ public DerbyChangeSpawnVehicleTimer()
         rand = -1
     ;
     // Randomly select a new spawn vehicle, excluding the current one
-    while(rand == -1 || gDerbySpawnVehicleID == gDerbyVehicleData[rand][E_DERBY_VEHICLE_DATA_MODELID]) {
+    while(rand == -1 || gDerbySpawnVehicleID == gDerbyVehicleData[rand][E_DERBY_VEHICLE_DATA_MODELID])
+    {
         rand = random(sizeof gDerbyVehicleData);
     }
     format(string, sizeof(string), "vehicle change!~n~%s", gDerbyVehicleData[rand][E_DERBY_VEHICLE_DATA_NAME]);
@@ -244,7 +251,8 @@ public DerbyChangeSpawnVehicleTimer()
 
 DestroyPlayerVehicle(playerid)
 {
-    if(gPlayerVehicleID[playerid] == INVALID_VEHICLE_ID) {
+    if(gPlayerVehicleID[playerid] == INVALID_VEHICLE_ID)
+    {
         return false;
     }
     DestroyVehicle(gPlayerVehicleID[playerid]);
