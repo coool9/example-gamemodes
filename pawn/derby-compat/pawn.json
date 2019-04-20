@@ -1,0 +1,12 @@
+{
+	"user": "openmultiplayer",
+	"repo": "derby-compat",
+	"entry": "derby.pwn",
+	"output": "derby.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib"
+	],
+	"contributors": [
+		"Laronic"
+	]
+}
