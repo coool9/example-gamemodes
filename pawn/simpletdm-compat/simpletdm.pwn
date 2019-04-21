@@ -70,7 +70,7 @@ public OnGameModeInit()
 	
     SetGameModeText("Simple TDM");
     EnableStuntBonusForAll(false);
-	UsePlayerPedAnims();
+    UsePlayerPedAnims();
     SetWeather(0);
     SetWorldTime(12);
 	
