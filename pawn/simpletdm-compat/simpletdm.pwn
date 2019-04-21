@@ -99,7 +99,7 @@ public OnMapUpdate()
     }
     else
     {
-	    if(Current_Map == _:MAP_STADIUM)
+	if(Current_Map == _:MAP_STADIUM)
         {
             Current_Map = _:MAP_JEFFERSON;
         }
@@ -108,7 +108,7 @@ public OnMapUpdate()
             Current_Map++;
         }
 		
-		Map_Duration = 300;
+        Map_Duration = 300;
 		
         for(new i = 0, j = GetPlayerPoolSize(); i <= j; i++)
         {
@@ -158,7 +158,7 @@ public OnPlayerSpawn(playerid)
         SetPlayerColor(playerid, BLUE_COLOUR);
         SetPlayerPos(playerid, Spawn_Positions[Current_Map][0], Spawn_Positions[Current_Map][1], Spawn_Positions[Current_Map][2]);
     }
-	else if(GetPlayerTeam(playerid) == _:RED_TEAM)
+    else if(GetPlayerTeam(playerid) == _:RED_TEAM)
     {
         SetPlayerSkin(playerid, 287);
         SetPlayerColor(playerid, RED_COLOUR);
