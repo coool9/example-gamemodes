@@ -1,10 +1,27 @@
+/*
+    GunGame is an example gamemode.
+    It contains minimal features to be fun out of the box. It is up to the
+    developer to add their own ideas to it.
+
+    Possibilites for new features include:
+        - Multiple skins
+        - Different maps
+        - Textdraws instead of gametext
+        - 'Effects' for weapons (e.g. exploding bullets for the
+            otherwise boring rifle)
+
+    Originally made by NotUnlikeTheWaves
+*/
+
 #include <a_samp>
 
     // Amount of kills required per level-up
 #define KILLS_PER_LEVEL 3
-
+	// Definition of body part ID that corresponds to the head of a character
 #define BODYPART_HEAD 9
-    // x - y - z - rotation angle
+
+    // These are the random locations the user can spawn at
+	// x - y - z - rotation angle
 new Float:RandPos[9][4] = {
 	{-1291.6622,2513.7566,87.0500,355.3697},
 	{-1303.8662,2527.4270,87.5878,358.6714},
@@ -17,25 +34,7 @@ new Float:RandPos[9][4] = {
 	{-1316.3402,2499.9949,87.0420,271.8305}
 };
 
-// new Weaps[14] = {
-// 	23,
-// 	22,
-// 	27,
-// 	26,
-// 	29,
-// 	32,
-// 	30,
-// 	31,
-// 	38,
-// 	33,
-// 	34,
-// 	35,
-// 	36,
-// 	24
-// };
-
-
-new Weaps[] = {
+new WeaponList[] = {
     WEAPON_COLT45,
     WEAPON_SILENCED,
     WEAPON_TEC9,
@@ -56,7 +55,7 @@ enum status {
 	level,
     kills_at_level,
 	bool:dead,
-	bool:pw, //Primary weapon
+	bool:holding_primary, // Whether the player holds their primary weapon
 };
 new PlayerStatus[MAX_PLAYERS][status];
 new Text:Respawn;
@@ -112,7 +111,7 @@ EndRound() {
 ShowKillsTillNextLevel(playerid) {
     new str[128];
     format(str, sizeof str, "~r~%i~y~ kills till level up!", KILLS_PER_LEVEL - PlayerStatus[playerid][kills_at_level]);
-    GameTextForPlayer(playerid, str, 700, 4);
+    GameTextForPlayer(playerid, str, 1000, 4);
 }
 
 public OnGameModeInit()
@@ -152,7 +151,7 @@ public OnPlayerConnect(playerid)
 	PlayerStatus[playerid][level] = 0;
     PlayerStatus[playerid][kills_at_level] = 0;
 	PlayerStatus[playerid][dead] = true;
-	PlayerStatus[playerid][pw] = true;
+	PlayerStatus[playerid][holding_primary] = true;
 	TextDrawHideForPlayer(playerid, Respawn);
 	SetPlayerColor(playerid, 0xFF0000FF);
 	return 1;
@@ -160,20 +159,20 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerSpawn(playerid)
 {
-		// Position
+		// Set position
 	new rand = random(9);
 	SetPlayerPos(playerid, RandPos[rand][0], RandPos[rand][1], RandPos[rand][2]);
 	SetPlayerFacingAngle(playerid, RandPos[rand][3]);
 	SetPlayerWorldBounds(playerid, -1274.2817, -1358.5095, 2575.6509, 2472.3486);
 	SetCameraBehindPlayer(playerid);
 	
-	    // Weapons
+	    // Give the right weapons
 	GivePlayerWeapon(playerid, WEAPON_KNIFE, 1);
-	GivePlayerWeapon(playerid, Weaps[PlayerStatus[playerid][level]], 65535);
+	GivePlayerWeapon(playerid, WeaponList[PlayerStatus[playerid][level]], 65535);
 	
 	    // General stuff
 	PlayerStatus[playerid][dead] = false;
-	PlayerStatus[playerid][pw] = true;
+	PlayerStatus[playerid][holding_primary] = true;
 	return 1;
 }
 
@@ -192,7 +191,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	{
 		PlayerSpectatePlayer(playerid, killerid);
 	
-		if(reason == WEAPON_KNIFE) // Knife deaths are humiliation and demote the player.
+		if(reason == WEAPON_KNIFE) // Knife deaths are humiliating and demote the player.
 		{
 		    GameTextForPlayer(killerid, "~r~Humiliation!~n~~y~You demoted someone!", 1650, 6);
 			GameTextForPlayer(playerid, "~r~Humiliated~n~~y~You got demoted!", 1650, 6);
@@ -200,29 +199,31 @@ public OnPlayerDeath(playerid, killerid, reason)
             PlayerStatus[playerid][kills_at_level] = 0;
 
 		}
-        GameTextForPlayer(killerid, "~r~Player Killed!~n~~y~Advanced to the next tier!", 1650, 6);
         PlayerStatus[killerid][kills_at_level]++;
         if(PlayerStatus[killerid][kills_at_level] == KILLS_PER_LEVEL) {
             PlayerStatus[killerid][kills_at_level] = 0;
             PlayerStatus[killerid][level]++;
-            if(PlayerStatus[killerid][level] == sizeof Weaps) EndRound(); //Player has won the game.
+            if(PlayerStatus[killerid][level] == sizeof WeaponList) EndRound(); //Player has won the game.
             else {
+        		GameTextForPlayer(killerid, "~r~Player Killed!~n~~y~Advanced to the next tier!", 1650, 6);
                 SetPlayerScore(killerid, PlayerStatus[killerid][level] + 1);
                 ResetPlayerWeapons(killerid);
                 GivePlayerWeapon(killerid, WEAPON_KNIFE, 1);
-                GivePlayerWeapon(killerid, Weaps[PlayerStatus[killerid][level]], 65535);
+                GivePlayerWeapon(killerid, WeaponList[PlayerStatus[killerid][level]], 65535);
             }
         }
-        ShowKillsTillNextLevel(killerid);
+        else ShowKillsTillNextLevel(killerid);
 	}
 	return 1;
 }
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart) {
     new Float:health;
-    new Float:multiplier = 2.0;
-    if(bodypart == BODYPART_HEAD) multiplier = 3.0; // Make headshots do 50% more damage over the regular multiplier
     GetPlayerHealth(playerid, health);
+		// Die twice as quickly as you normally would, to increase the pace in the game.
+    new Float:multiplier = 2.0;
+		// Make headshots do 50% more damage over the regular multiplier
+    if(bodypart == BODYPART_HEAD) multiplier = 3.0;
     SetPlayerHealth(playerid, health - amount * multiplier);
 }
 
@@ -231,21 +232,21 @@ public OnPlayerUpdate(playerid)
 	if(PlayerStatus[playerid][dead] == false)
 	{		
 			// We want to avoid the player switching to his hands as a weapon
-            // A player should only be able to use his knife and the weapon given to him.
+            // A player should only be able to use his knife and the weapon given to them.
 		if(!GetPlayerWeapon(playerid))
 		{
-			if(PlayerStatus[playerid][pw] == true)
+			if(PlayerStatus[playerid][holding_primary] == true)
 			{
-				SetPlayerArmedWeapon(playerid, 4);
-				PlayerStatus[playerid][pw] = false;
+				SetPlayerArmedWeapon(playerid, WEAPON_KNIFE);
+				PlayerStatus[playerid][holding_primary] = false;
 			}
 				else
 			{
-			    SetPlayerArmedWeapon(playerid, Weaps[PlayerStatus[playerid][level]]);
-				PlayerStatus[playerid][pw] = true;
+			    SetPlayerArmedWeapon(playerid, WeaponList[PlayerStatus[playerid][level]]);
+				PlayerStatus[playerid][holding_primary] = true;
 			}
 		}
-		else PlayerStatus[playerid][pw] = GetPlayerWeapon(playerid) == 4 ? false : true;
+		else PlayerStatus[playerid][holding_primary] = GetPlayerWeapon(playerid) == WEAPON_KNIFE ? false : true;
 		
 	}
  	else
