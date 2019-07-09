@@ -1,0 +1,12 @@
+{
+	"user": "NotUnlikeTheWaves",
+	"repo": "gungame",
+	"entry": "gungame.pwn",
+	"output": "gungame.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib"
+	],
+	"contributors" : [
+		"NotUnlikeTheWaves"
+	]
+}
