@@ -148,6 +148,11 @@ public OnPlayerRequestClass(playerid, classid)
 
 public OnPlayerConnect(playerid)
 {
+    SendClientMessage(playerid, 0xFF0000FF, "Welcome to Gun Game! The rules are simple:");
+    SendClientMessage(playerid, 0xFFFFFFFF, "You start with two pistols. You advance to the next weapon by killing other players.");
+    SendClientMessage(playerid, 0xFFFFFFFF, "The last stage is the Desert Eagle! Get enough kills with it, and you win the round!");
+    SendClientMessage(playerid, 0xFFFFFFFF, "You also have a knife. Use it to demote other players!");
+    SendClientMessage(playerid, 0xFFFFFFFF, "Have fun, and let the games begin!");
 	PlayerStatus[playerid][level] = 0;
     PlayerStatus[playerid][kills_at_level] = 0;
 	PlayerStatus[playerid][dead] = true;
