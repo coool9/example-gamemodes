@@ -4,10 +4,4 @@ Simple scripts to demonstrate coding in Pawn and other languages on open.mp.
 
 ## Contributing
 
-To get started, first [sign the Contributor License Agreement](https://www.clahub.com/agreements/openmultiplayer/example-gamemodes).  This basically just means you agree to let us use your work, and put it under an open-source license:
-
-![CLA form](https://i.imgur.com/jp4Qjap.png)
-
-* "Name" - Your real name or your github name.
-* "Corporate Contributor Information" - If this doesn't apply, simply write "N/A".
-
+To get started, first [sign the Contributor License Agreement](https://cla-assistant.io/openmultiplayer/). This basically just means you agree to let us use your work, and put it under an open-source license.
