@@ -74,8 +74,10 @@ forward Restart();
 main()
 {
 	print("\n----------------------------------");
-	print(" ggame is a gun game mode.");
-	print(" Author: anesthesia");
+	print(" ggame is a gun game mode released as");
+	print(" an example mode for open.mp");
+	print(" ");
+	print(" Author: NotUnlikeTheWaves (github)");
 	print("----------------------------------\n");
 }
 
