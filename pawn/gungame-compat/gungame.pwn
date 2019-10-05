@@ -15,25 +15,26 @@
 
 #include <a_samp>
 
-    // Amount of kills required per level-up
+// Amount of kills required per level-up
 #define KILLS_PER_LEVEL 3
-    // Definition of body part ID that corresponds to the head of a character
+
+// Definition of body part ID that corresponds to the head of a character
 #define BODYPART_HEAD 9
 
-    // These are the random locations the user can spawn at
-    // x - y - z - rotation angle
+// These are the random locations the user can spawn at
+// x - y - z - rotation angle
 new const
     Float:gRandPos[9][4] =
     {
-        {-1291.6622,2513.7566,87.0500,355.3697},
-        {-1303.8662,2527.4270,87.5878,358.6714},
-        {-1308.1099,2544.3853,87.7422,171.4412},
-        {-1321.0725,2526.1138,87.4379,183.3481},
-        {-1335.7893,2520.8984,87.0469,270.7455},
-        {-1298.5408,2547.2991,87.6747,356.4313},
-        {-1291.3345,2533.8853,87.7422,92.7705},
-        {-1288.5410,2528.5769,87.6331,183.0114},
-        {-1316.3402,2499.9949,87.0420,271.8305}
+        {-1291.6622, 2513.7566, 87.0500, 355.3697},
+        {-1303.8662, 2527.4270, 87.5878, 358.6714},
+        {-1308.1099, 2544.3853, 87.7422, 171.4412},
+        {-1321.0725, 2526.1138, 87.4379, 183.3481},
+        {-1335.7893, 2520.8984, 87.0469, 270.7455},
+        {-1298.5408, 2547.2991, 87.6747, 356.4313},
+        {-1291.3345, 2533.8853, 87.7422, 92.7705},
+        {-1288.5410, 2528.5769, 87.6331, 183.0114},
+        {-1316.3402, 2499.9949, 87.0420, 271.8305}
     },
     gWeaponList[] =
     {
@@ -59,12 +60,11 @@ enum e_STATUS
     e_LEVEL,
     e_KILLS_AT_LEVEL,
     bool:e_DEAD,
-    bool:e_HOLDING_PRIMARY, // Whether the player holds their primary weapon
+    bool:e_HOLDING_PRIMARY // Whether the player holds their primary weapon
 };
 
 new
-    gPlayerStatus[MAX_PLAYERS][e_STATUS]
-,
+    gPlayerStatus[MAX_PLAYERS][e_STATUS],
     Text:gRespawn,
     bool:gGameInProgress
 ;
@@ -74,7 +74,7 @@ forward Restart();
 main()
 {
     print("\n----------------------------------");
-    print(" ggame is a gun game mode released as");
+    print(" gungame is a gun game mode released as");
     print(" an example mode for open.mp");
     print(" ");
     print(" Author: NotUnlikeTheWaves (github)");
@@ -86,7 +86,6 @@ public OnGameModeInit()
     SetGameModeText("Gun Game");
     AddPlayerClass(0, -1291.6622, 2513.7566, 87.0500, 355.3697, 0, 0, 0, 0, 0, 0);
     ShowPlayerMarkers(0);
-    
     gRespawn = TextDrawCreate(320.000000, 155.000000, "~y~Press '~r~~k~~VEHICLE_ENTER_EXIT~~y~' to spawn!");
     TextDrawAlignment(gRespawn, 2);
     TextDrawBackgroundColor(gRespawn, 255);
@@ -131,18 +130,18 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerSpawn(playerid)
 {
-        // Set position
+    // Set position
     new rand = random(9);
     SetPlayerPos(playerid, gRandPos[rand][0], gRandPos[rand][1], gRandPos[rand][2]);
     SetPlayerFacingAngle(playerid, gRandPos[rand][3]);
     SetPlayerWorldBounds(playerid, -1274.2817, -1358.5095, 2575.6509, 2472.3486);
     SetCameraBehindPlayer(playerid);
-    
-        // Give the right weapons
+
+    // Give the right weapons to the player
     GivePlayerWeapon(playerid, WEAPON_KNIFE, 1);
     GivePlayerWeapon(playerid, gWeaponList[gPlayerStatus[playerid][e_LEVEL]], 65535);
-    
-        // General stuff
+
+    // General stuff
     gPlayerStatus[playerid][e_DEAD] = false;
     gPlayerStatus[playerid][e_HOLDING_PRIMARY] = true;
     return 1;
@@ -162,7 +161,8 @@ public OnPlayerDeath(playerid, killerid, reason)
     else
     {
         PlayerSpectatePlayer(playerid, killerid);
-            // Knife deaths are humiliating and demote the player.
+
+        // Knife deaths are humiliating, and demote the player.
         if(reason == WEAPON_KNIFE)
         {
             GameTextForPlayer(killerid, "~r~Humiliation!~n~~y~You demoted someone!", 1650, 6);
@@ -177,7 +177,7 @@ public OnPlayerDeath(playerid, killerid, reason)
             gPlayerStatus[killerid][e_KILLS_AT_LEVEL] = 0;
             gPlayerStatus[killerid][e_LEVEL]++;
 
-                //Player has won the game.
+            //Player has won the game.
             if(gPlayerStatus[killerid][e_LEVEL] == sizeof gWeaponList)
             {
                 EndRound();
@@ -191,27 +191,36 @@ public OnPlayerDeath(playerid, killerid, reason)
                 GivePlayerWeapon(killerid, gWeaponList[gPlayerStatus[killerid][e_LEVEL]], 65535);
             }
         }
-        else ShowKillsTillNextLevel(killerid);
+        else
+        {
+            ShowKillsTillNextLevel(killerid);
+        }
     }
     return 1;
 }
 
-public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart) {
+public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
+{
     new Float:health;
     GetPlayerHealth(playerid, health);
-        // Die twice as quickly as you normally would, to increase the pace in the game.
+
+    // Take twice the damage as you normally would, to increase the pace in the game.
     new Float:multiplier = 2.0;
-        // Make headshots do 50% more damage over the regular multiplier
-    if(bodypart == BODYPART_HEAD) multiplier = 3.0;
+
+    // Make headshots do 50% more damage over the regular multiplier
+    if(bodypart == BODYPART_HEAD)
+    {
+        multiplier = 3.0;
+    }
     SetPlayerHealth(playerid, health - amount * multiplier);
 }
 
 public OnPlayerUpdate(playerid)
 {
     if(gPlayerStatus[playerid][e_DEAD] == false)
-    {		
-            // We want to avoid the player switching to his hands as a weapon
-            // A player should only be able to use his knife and the weapon given to them.
+    {
+        // We want to avoid the player switching to his hands as a weapon
+        // A player should only be able to use his knife and the weapon given to them.
         if(!GetPlayerWeapon(playerid))
         {
             if(gPlayerStatus[playerid][e_HOLDING_PRIMARY] == true)
@@ -225,10 +234,13 @@ public OnPlayerUpdate(playerid)
                 gPlayerStatus[playerid][e_HOLDING_PRIMARY] = true;
             }
         }
-        else gPlayerStatus[playerid][e_HOLDING_PRIMARY] = GetPlayerWeapon(playerid) == WEAPON_KNIFE ? false : true;
-        
+        else
+        {
+            gPlayerStatus[playerid][e_HOLDING_PRIMARY] = !(GetPlayerWeapon(playerid) == WEAPON_KNIFE);
+        }
+
     }
-     else
+    else
     {
         SetPlayerCameraPos(playerid, -1251.1089, 2551.7546, 104.6863);
         SetPlayerCameraLookAt(playerid, -1302.1554, 2533.4226, 93.8427);
@@ -255,7 +267,8 @@ EndRound()
     SendClientMessageToAll(0x008000FF, "The game has ended!");
     SendClientMessageToAll(0x008000FF, "A new round will start in 8 seconds.");
     gGameInProgress = false;
-        // Print the top three best players.
+
+    // Print the top three best players.
     new highest[3] = {INVALID_PLAYER_ID, ...};
     for(new i = 0; i < MAX_PLAYERS; i++)
     {
@@ -266,19 +279,20 @@ EndRound()
         TogglePlayerSpectating(i, 1);
         SetPlayerCameraPos(i, -1251.1089, 2551.7546, 104.6863);
         SetPlayerCameraLookAt(i, -1302.1554, 2533.4226, 93.8427);
-            // Find the player with the highest score.
+
+        // Find the player with the highest score.
         if(GetPlayerScore(i) > GetPlayerScore(highest[0]))
         {
             highest[2] = highest[1];
             highest[1] = highest[0];
             highest[0] = i;
         }
-            else if(GetPlayerScore(i) > GetPlayerScore(highest[1]))
+        else if(GetPlayerScore(i) > GetPlayerScore(highest[1]))
         {
             highest[2] = highest[1];
             highest[1] = i;
         }
-            else if(GetPlayerScore(i) > GetPlayerScore(highest[2]))
+        else if(GetPlayerScore(i) > GetPlayerScore(highest[2]))
         {
             highest[2] = i;
         }
@@ -288,8 +302,14 @@ EndRound()
     GetPlayerName(highest[0], pName[0], MAX_PLAYER_NAME);
     GetPlayerName(highest[1], pName[1], MAX_PLAYER_NAME);
     GetPlayerName(highest[2], pName[2], MAX_PLAYER_NAME);
-    format(string, sizeof string, "~r~The match ended!~n~~g~1. %02i - %s~n~~y~2. %02i - %s~n~~r~~h~3. %02i - %s", 
-        GetPlayerScore(highest[0]), pName[0], GetPlayerScore(highest[1]), pName[1], GetPlayerScore(highest[2]), pName[2]);
+    format(string, sizeof string,
+        "~r~The match ended!~n~~g~1. %02i - %s~n~~y~2. %02i - %s~n~~r~~h~3. %02i - %s", 
+        GetPlayerScore(highest[0]),
+        pName[0],
+        GetPlayerScore(highest[1]),
+        pName[1],
+        GetPlayerScore(highest[2]),
+        pName[2]);
     GameTextForAll(string, 7500, 1);
     SetTimer("Restart", 8000, 0);
 }
