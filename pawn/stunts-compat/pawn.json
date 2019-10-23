@@ -1,0 +1,22 @@
+{
+	"user": "openmultiplayer",
+	"repo": "stunts-compat",
+	"contributors": [
+		"dakyskye"
+	],
+	"entry": "stunts.pwn",
+	"output": "stunts.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib",
+		"pawn-lang/YSI-Includes@5.x",
+		"Southclaws/formatex"
+	],
+	"runtime": {
+		"version": "0.3.7",
+		"mode": "server",
+		"maxplayers": 32,
+		"echo": "-",
+		"rcon_password": "password",
+		"port": 7777
+	}
+}
