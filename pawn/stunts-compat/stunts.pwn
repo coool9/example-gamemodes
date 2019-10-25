@@ -79,24 +79,24 @@ new Iterator:gPlayerTPRequests[MAX_PLAYERS]<MAX_PLAYERS>;
 //
 main()
 {
-	print(!"\n");
-	print(!" =======================================");
-	print(!" |                                     |");
-	print(!" |           NGS Stunts Room           |");
-	print(!" |             By dakyskye             |");
-	print(!" |                                     |");
-	print(!" =======================================");
-	print(!"\n");
-	print(!" > Asserting max players sort with defined MAX_PLAYERS");
+	print("\n");
+	print(" =======================================");
+	print(" |                                     |");
+	print(" |           NGS Stunts Room           |");
+	print(" |             By dakyskye             |");
+	print(" |                                     |");
+	print(" =======================================");
+	print("\n");
+	print(" > Asserting max players sort with defined MAX_PLAYERS");
 	assert(GetMaxPlayers() == MAX_PLAYERS);
-	print(!" > Assertion succeed");
-	print(!"\n");
+	print(" > Assertion succeed");
+	print("\n");
 }
 
 //
 hook OnScriptInit()
 {
-	SetGameModeText(!"NGS Stunts Room");
+	SetGameModeText("NGS Stunts Room");
 
 	UsePlayerPedAnims();
 	DisableInteriorEnterExits();
@@ -104,7 +104,7 @@ hook OnScriptInit()
 	SetWeather(2);
 	SetWorldTime(16);
 
-	gServerTextDraw = TextDrawCreate(633.999572, 3.333337, !"NGS Stunts Room");
+	gServerTextDraw = TextDrawCreate(633.999572, 3.333337, "NGS Stunts Room");
 	TextDrawLetterSize(gServerTextDraw, 0.400000, 1.600000);
 	TextDrawAlignment(gServerTextDraw, 3);
 	TextDrawColor(gServerTextDraw, -610526465);
@@ -163,11 +163,11 @@ hook OnScriptExit()
 
 hook OnPlayerConnect(playerid)
 {
-	SendClientMessage(playerid, X11_FOREST_GREEN, !"Welcome to the NGS Stunts Room");
-	SendClientMessage(playerid, X11_FOREST_GREEN, !"Entertain and train yourself with the freeroam of vehicles");
-	SendClientMessage(playerid, X11_FOREST_GREEN, !"To get the list of commands, type /commands");
-	SendClientMessage(playerid, X11_FOREST_GREEN, !"To get the list of command aliases, type /alts");
-	SendClientMessage(playerid, X11_FOREST_GREEN, !"To get a help for a command, type /help");
+	SendClientMessage(playerid, X11_FOREST_GREEN, "Welcome to the NGS Stunts Room");
+	SendClientMessage(playerid, X11_FOREST_GREEN, "Entertain and train yourself with the freeroam of vehicles");
+	SendClientMessage(playerid, X11_FOREST_GREEN, "To get the list of commands, type /commands");
+	SendClientMessage(playerid, X11_FOREST_GREEN, "To get the list of command aliases, type /alts");
+	SendClientMessage(playerid, X11_FOREST_GREEN, "To get a help for a command, type /help");
 
 	new pName[MAX_PLAYER_NAME + 1];
 	GetPlayerName(playerid, pName, sizeof(pName));
@@ -314,10 +314,10 @@ hook OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 		}
 
 		SetPlayerPos(playerID, fX, fY, fZ);
-		SendClientMessage(playerID, X11_FOREST_GREEN, !"You just teleported to the position you marked on map");
+		SendClientMessage(playerID, X11_FOREST_GREEN, "You just teleported to the position you marked on map");
 	}
 
-	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_MSGBOX, !"Want to teleport?", !"You just clicked on a map, if you want to teleport there, click \"TP\"", !"TP", !"Abort");
+	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_MSGBOX, "Want to teleport?", "You just clicked on a map, if you want to teleport there, click \"TP\"", "TP", "Abort");
 
 	return Y_HOOKS_CONTINUE_RETURN_1;
 }
@@ -366,8 +366,8 @@ YCMD:help(playerid, cmdtext[], help)
 	{
 		if (isnull(cmdtext))
 		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, !"Usage of the help command is \"/help <command>\"");
-			SendClientMessage(playerid, X11_FOREST_GREEN, !"Example usage: /help commands");
+			SendClientMessage(playerid, X11_FOREST_GREEN, "Usage of the help command is \"/help <command>\"");
+			SendClientMessage(playerid, X11_FOREST_GREEN, "Example usage: /help commands");
 		}
 		else
 		{
@@ -389,11 +389,11 @@ YCMD:heal(playerid, cmdtext[], help)
 		if (GetPlayerVehicleSeat(playerid) == 0)
 		{
 			RepairVehicle(GetPlayerVehicleID(playerid));
-			SendClientMessage(playerid, X11_FOREST_GREEN, !"Your health was filled and the car was repaired");
+			SendClientMessage(playerid, X11_FOREST_GREEN, "Your health was filled and the car was repaired");
 		}
 		else
 		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, !"Your health was filled");
+			SendClientMessage(playerid, X11_FOREST_GREEN, "Your health was filled");
 		}
 	}
 	return 1;
@@ -408,7 +408,7 @@ YCMD:kill(playerid, cmdtext[], help)
 	else
 	{
 		SetPlayerHealth(playerid, 0.0);
-		SendClientMessage(playerid, X11_FOREST_GREEN, !"You killed yourself");
+		SendClientMessage(playerid, X11_FOREST_GREEN, "You killed yourself");
 	}
 	return 1;
 }
@@ -464,7 +464,7 @@ YCMD:teleport(playerid, cmdtext[], help)
 				strcat(list, listItem);
 			}
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_LIST, !"Select where you want to teleport", list, !"TP", !"Abort");
+		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_LIST, "Select where you want to teleport", list, "TP", "Abort");
 	}
 	return 1;
 }
@@ -489,7 +489,7 @@ YCMD:skin(playerid, cmdtext[], help)
 			skinid = strval(inputtext);
 			if (skinid < 1 || skinid > 311)
 			{
-				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, !"Input a valid skin ID!", !"Valid skin IDs are from 1 to 311.\nInput the skin ID you want to select", !"Next", !"Cancel");
+				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid skin ID", "Valid skin IDs are from 1 to 311.\nInput the skin ID you want to select", "Next", "Cancel");
 				return 0;
 			}
 			new const vehID = GetPlayerVehicleID(playerID);
@@ -500,7 +500,7 @@ YCMD:skin(playerid, cmdtext[], help)
 			}
 			va_SendClientMessage(playerID, X11_FOREST_GREEN, "You successfully changed your skin id to " CORAL "%d", skinid);
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, !"Input a skin ID", !"Input the skin ID you want to select", !"Next", !"Cancel");
+		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a skin ID", "Input the skin ID you want to select", "Next", "Cancel");
 	}
 	return 1;
 }
@@ -525,7 +525,7 @@ YCMD:vehicle(playerid, cmdtext[], help)
 			vehicleid = strval(inputtext);
 			if (vehicleid < 400 || vehicleid > 611)
 			{
-				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, !"Input a valid vehicle ID!", !"Valid vehicle IDs are from 400 to 611, but there are also exceptions.\nInput the vehicle ID you want to spawn", !"Next", !"Cancel");
+				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid vehicle ID", "Valid vehicle IDs are from 400 to 611, but there are also exceptions.\nInput the vehicle ID you want to spawn", "Next", "Cancel");
 				return 0;
 			}
 			new Float:posX, Float:posY, Float:posZ, Float:posA;
@@ -542,7 +542,7 @@ YCMD:vehicle(playerid, cmdtext[], help)
 			format(msg, sizeof(msg), "You just spawned "SALMON"%v "FOREST_GREEN" ("SALMON"%d"FOREST_GREEN")", vehicleid, vehicleid);
 			SendClientMessage(playerid, X11_FOREST_GREEN, msg);
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, !"Input a vehicle ID", !"Input the vehicle ID you want to spawn", !"Next", !"Cancel");
+		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a vehicle ID", "Input the vehicle ID you want to spawn", "Next", "Cancel");
 	}
 	return 1;
 }
@@ -558,11 +558,11 @@ YCMD:destroyvehicle(playerid, cmdtext[], help)
 		if (GetPlayerVehicleSeat(playerid) == 0)
 		{
 			DestroyVehicle(GetPlayerVehicleID(playerid));
-			SendClientMessage(playerid, X11_FOREST_GREEN, !"You just destroyed a vehicle");
+			SendClientMessage(playerid, X11_FOREST_GREEN, "You just destroyed a vehicle");
 		}
 		else
 		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, !"You must be in the driver's seat of a vehicle to destroy it");
+			SendClientMessage(playerid, X11_FOREST_GREEN, "You must be in the driver's seat of a vehicle to destroy it");
 		}
 	}
 	return 1;
@@ -594,7 +594,7 @@ YCMD:virtualworld(playerid, cmdtext[], help)
 			SetPlayerVirtualWorld(playerID, worldID);
 			va_SendClientMessage(playerID, X11_FOREST_GREEN, "You changed your virtual world to " CORAL "%d", worldID);
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, !"Input a virtual world ID", !"Input the virtual world ID you want to move to", !"Go", !"Cancel");
+		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a virtual world ID", "Input the virtual world ID you want to move to", "Go", "Cancel");
 	}
 	return 1;
 }
@@ -624,7 +624,7 @@ YCMD:savepos(playerid, cmdtext[], help)
 			SetPVarFloat(playerid, "posZ", z);
 			SetPVarFloat(playerid, "posA", a);
 		}
-		SendClientMessage(playerid, X11_FOREST_GREEN, !"You just saved your current position, use /pos to teleport there anytime");
+		SendClientMessage(playerid, X11_FOREST_GREEN, "You just saved your current position, use /pos to teleport there anytime");
 	}
 	return 1;
 }
@@ -645,7 +645,7 @@ YCMD:pos(playerid, cmdtext[], help)
 			z = GetPVarFloat(playerid, "vehZ");
 			if (!(x != 0.0 && y != 0.0 && z != 0.0))
 			{
-				SendClientMessage(playerid, X11_FOREST_GREEN, !"You have not saved any in-vehicle position yet");
+				SendClientMessage(playerid, X11_FOREST_GREEN, "You have not saved any in-vehicle position yet");
 				return 3;
 			}
 			SetVehiclePos(GetPlayerVehicleID(playerid), x, y, z);
@@ -658,13 +658,13 @@ YCMD:pos(playerid, cmdtext[], help)
 			a = GetPVarFloat(playerid, "posA");
 			if (!(x != 0.0 && y != 0.0 && z != 0.0))
 			{
-				SendClientMessage(playerid, X11_FOREST_GREEN, !"You have not saved any on-foot position yet");
+				SendClientMessage(playerid, X11_FOREST_GREEN, "You have not saved any on-foot position yet");
 				return 3;
 			}
 			SetPlayerPos(playerid, x, y, z);
 			SetPlayerFacingAngle(playerid, a);
 		}
-		SendClientMessage(playerid, X11_FOREST_GREEN, !"You just telepeorted to your saved position");
+		SendClientMessage(playerid, X11_FOREST_GREEN, "You just telepeorted to your saved position");
 	}
 	return 1;
 }
@@ -702,7 +702,7 @@ YCMD:commands(playerid, cmdtext[], help)
 				strcat(commands, fmt);
 			}
 		}
-		SendClientMessage(playerid, X11_GOLDENROD, !"All the available commands are:");
+		SendClientMessage(playerid, X11_GOLDENROD, "All the available commands are:");
 		SendClientMessage(playerid, X11_GOLDENROD, commands);
 	}
 	return 1;
@@ -716,7 +716,7 @@ YCMD:alts(playerid, cmdtext[], help)
 	}
 	else
 	{
-		SendClientMessage(playerid, X11_GOLDENROD, !"Commands with alternative names are:");
+		SendClientMessage(playerid, X11_GOLDENROD, "Commands with alternative names are:");
 		for (new in = 0; in != sizeof gServerCommands; in++)
 		{
 			if (!isnull(gServerCommands[in][E_COMMAND_ALIAS]))
@@ -750,7 +750,7 @@ YCMD:goto(playerid, cmdtext[], help)
 			pid = strval(inputtext);
 			if (pid < 0 || pid > (MAX_PLAYERS - 1))
 			{
-				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, !"Input a valid player ID!", !"Valid player id can be from 0 to 999\nInput the player id you want to teleport to", !"TP", !"Abort");
+				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid player ID", "Valid player id can be from 0 to 999\nInput the player id you want to teleport to", "TP", "Abort");
 				return 0;
 			}
 			if (!IsPlayerConnected(pid))
@@ -760,7 +760,7 @@ YCMD:goto(playerid, cmdtext[], help)
 			}
 			if (pid == playerID)
 			{
-				SendClientMessage(playerID, X11_FOREST_GREEN, !"You can't request a teleport with yourself");
+				SendClientMessage(playerID, X11_FOREST_GREEN, "You can't request a teleport with yourself");
 				return 0;
 			}
 
@@ -773,7 +773,7 @@ YCMD:goto(playerid, cmdtext[], help)
 			va_SendClientMessage(pid, X11_FOREST_GREEN, ""CORAL"%s "FOREST_GREEN"has requested to teleport to you", requesterName);
 			defer CheckPlayerTPRequest(pid, playerID);
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, !"Input a player id", !"Input the player id you want to teleport to", !"TP", !"Abort");
+		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a player id", "Input the player id you want to teleport to", "TP", "Abort");
 	}
 	return 1;
 }
@@ -788,7 +788,7 @@ YCMD:requests(playerid, cmdtext[], help)
 	{
 		if (Iter_Count(gPlayerTPRequests[playerid]) == 0)
 		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, !"You don't have any teleport request");
+			SendClientMessage(playerid, X11_FOREST_GREEN, "You don't have any teleport request");
 			return 3;
 		}
 		inline _response(playerID, dialogID, response, listitem, string:inputtext[])
@@ -809,7 +809,7 @@ YCMD:requests(playerid, cmdtext[], help)
 			new const sPlayerID = requesterIDs[listitem];
 			if (!Iter_Contains(gPlayerTPRequests[playerID], sPlayerID))
 			{
-				SendClientMessage(playerid, X11_FOREST_GREEN, !"That player might have disconnected or the request expirted");
+				SendClientMessage(playerid, X11_FOREST_GREEN, "That player might have disconnected or the request expirted");
 				return 1;
 			}
 			new
@@ -865,7 +865,7 @@ YCMD:requests(playerid, cmdtext[], help)
 				strcat(list, listItem);
 			}
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_LIST, !"Select whose teleport request to accept", list, !"Select", !"Abort");
+		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_LIST, "Select whose teleport request to accept", list, "Select", "Abort");
 	}
 	return 1;
 }
@@ -942,7 +942,7 @@ ShowCommandHelp(const playerid, const command[MAX_COMMAND_LENGTH])
 
 	if (!found)
 	{
-		SendClientMessage(playerid, X11_FOREST_GREEN, !"No help section was registered for this command");
+		SendClientMessage(playerid, X11_FOREST_GREEN, "No help section was registered for this command");
 		printf("[ShowCommandHelp] couldn't show help for command \"%s\"; It might be not registered", command);
 		return 0;
 	}
@@ -951,7 +951,7 @@ ShowCommandHelp(const playerid, const command[MAX_COMMAND_LENGTH])
 	
 	if (isnull(cmd[E_COMMAND_ALIAS]))
 	{
-		SendClientMessage(playerid, X11_SEA_GREEN_3, !"> does not have any alias");
+		SendClientMessage(playerid, X11_SEA_GREEN_3, "> does not have any alias");
 	}
 	else
 	{
@@ -960,7 +960,7 @@ ShowCommandHelp(const playerid, const command[MAX_COMMAND_LENGTH])
 
 	if (isnull(cmd[E_COMMAND_DESCRIPTION]))
 	{
-		SendClientMessage(playerid, X11_SEA_GREEN_3, !"> no command description provided");
+		SendClientMessage(playerid, X11_SEA_GREEN_3, "> no command description provided");
 	}
 	else
 	{
