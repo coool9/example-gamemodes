@@ -11,8 +11,6 @@
 	=======================================
 */
 
-#pragma compress 0
-
 #include <a_samp>
 
 #if defined MAX_PLAYERS
@@ -34,6 +32,8 @@
 
 #include <formatex>
 
+#pragma compress 0
+
 #if !defined isnull
 	#define isnull(%1) ((!(%1[0])) || (((%1[0]) == '\1') && (!(%1[1]))))
 #endif
@@ -41,10 +41,10 @@
 //
 enum E_PLAYER_SPEEDOMETER
 {
-	bool:E_PLAYER_SPEEDOMETERIS_SHOWN,
-	PlayerText:E_PLAYER_SPEEDOMETERTITLE[2],
-	PlayerText:E_PLAYER_SPEEDOMETERVEHICLE,
-	PlayerText:E_PLAYER_SPEEDOMETERSPEED
+	bool:E_PLAYER_SPEEDOMETER_IS_SHOWN,
+	PlayerText:E_PLAYER_SPEEDOMETER_TITLE[2],
+	PlayerText:E_PLAYER_SPEEDOMETER_VEHICLE,
+	PlayerText:E_PLAYER_SPEEDOMETER_SPEED
 };
 
 
@@ -143,7 +143,9 @@ hook OnScriptInit()
 
 	for(new id = 1; id != 312; id++)
 	{
-		if (id == 74) continue;
+		if (id == 74) {
+			continue;
+		}
 		AddPlayerClass(id, 1514.7428, -2286.0576, 13.5469, 269.0387, 0, 0, 0, 0, 0, 0);
 	}
     
@@ -173,55 +175,55 @@ hook OnPlayerConnect(playerid)
 
 	TextDrawShowForPlayer(playerid, gServerTextDraw);
 
-	gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0] = CreatePlayerTextDraw(playerid, 164.353012, 331.749908, "Vehicle:");
-	PlayerTextDrawLetterSize(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0], 0.306823, 1.360833);
-	PlayerTextDrawAlignment(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0], 3);
-	PlayerTextDrawColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0], -1);
-	PlayerTextDrawSetShadow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0], 0);
-	PlayerTextDrawSetOutline(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0], 1);
-	PlayerTextDrawBackgroundColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0], 255);
-	PlayerTextDrawFont(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0], 1);
-	PlayerTextDrawSetProportional(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0], 1);
+	gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0] = CreatePlayerTextDraw(playerid, 164.353012, 331.749908, "Vehicle:");
+	PlayerTextDrawLetterSize(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0], 0.306823, 1.360833);
+	PlayerTextDrawAlignment(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0], 3);
+	PlayerTextDrawColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0], -1);
+	PlayerTextDrawSetShadow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0], 0);
+	PlayerTextDrawSetOutline(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0], 1);
+	PlayerTextDrawBackgroundColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0], 255);
+	PlayerTextDrawFont(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0], 1);
+	PlayerTextDrawSetProportional(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0], 1);
 
-	gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1] = CreatePlayerTextDraw(playerid, 164.353012, 349.250000, "Speed:");
-	PlayerTextDrawLetterSize(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1], 0.306823, 1.360833);
-	PlayerTextDrawAlignment(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1], 3);
-	PlayerTextDrawColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1], -1);
-	PlayerTextDrawSetShadow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1], 0);
-	PlayerTextDrawSetOutline(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1], 1);
-	PlayerTextDrawBackgroundColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1], 255);
-	PlayerTextDrawFont(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1], 1);
-	PlayerTextDrawSetProportional(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1], 1);
+	gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1] = CreatePlayerTextDraw(playerid, 164.353012, 349.250000, "Speed:");
+	PlayerTextDrawLetterSize(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1], 0.306823, 1.360833);
+	PlayerTextDrawAlignment(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1], 3);
+	PlayerTextDrawColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1], -1);
+	PlayerTextDrawSetShadow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1], 0);
+	PlayerTextDrawSetOutline(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1], 1);
+	PlayerTextDrawBackgroundColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1], 255);
+	PlayerTextDrawFont(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1], 1);
+	PlayerTextDrawSetProportional(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1], 1);
 
-	gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE] = CreatePlayerTextDraw(playerid, 172.823532, 331.166748, "_");
-	PlayerTextDrawLetterSize(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], 0.239999, 1.541666);
-	PlayerTextDrawAlignment(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], 1);
-	PlayerTextDrawColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], -1);
-	PlayerTextDrawSetShadow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], 0);
-	PlayerTextDrawSetOutline(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], 1);
-	PlayerTextDrawBackgroundColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], 255);
-	PlayerTextDrawFont(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], 2);
-	PlayerTextDrawSetProportional(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], 1);
+	gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE] = CreatePlayerTextDraw(playerid, 172.823532, 331.166748, "_");
+	PlayerTextDrawLetterSize(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], 0.239999, 1.541666);
+	PlayerTextDrawAlignment(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], 1);
+	PlayerTextDrawColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], -1);
+	PlayerTextDrawSetShadow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], 0);
+	PlayerTextDrawSetOutline(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], 1);
+	PlayerTextDrawBackgroundColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], 255);
+	PlayerTextDrawFont(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], 2);
+	PlayerTextDrawSetProportional(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], 1);
 
-	gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED] = CreatePlayerTextDraw(playerid, 172.352935, 348.666748, "0_KMPH");
-	PlayerTextDrawLetterSize(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], 0.239999, 1.541666);
-	PlayerTextDrawAlignment(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], 1);
-	PlayerTextDrawColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], -1);
-	PlayerTextDrawSetShadow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], 0);
-	PlayerTextDrawSetOutline(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], 1);
-	PlayerTextDrawBackgroundColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], 255);
-	PlayerTextDrawFont(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], 2);
-	PlayerTextDrawSetProportional(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], 1);
+	gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED] = CreatePlayerTextDraw(playerid, 172.352935, 348.666748, "0_KMPH");
+	PlayerTextDrawLetterSize(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], 0.239999, 1.541666);
+	PlayerTextDrawAlignment(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], 1);
+	PlayerTextDrawColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], -1);
+	PlayerTextDrawSetShadow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], 0);
+	PlayerTextDrawSetOutline(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], 1);
+	PlayerTextDrawBackgroundColor(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], 255);
+	PlayerTextDrawFont(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], 2);
+	PlayerTextDrawSetProportional(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], 1);
 
 	return Y_HOOKS_CONTINUE_RETURN_1;
 }
 
 hook OnPlayerDisconnect(playerid, reason)
 {
-	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0]);
-	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1]);
-	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE]);
-	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED]);
+	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0]);
+	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1]);
+	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE]);
+	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED]);
 
 	Iter_Clear(gPlayerTPRequests[playerid]);
 	
@@ -280,22 +282,22 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 {
 	if (oldstate == PLAYER_STATE_ONFOOT && ((newstate == PLAYER_STATE_DRIVER) || (newstate == PLAYER_STATE_PASSENGER)))
 	{
-		PlayerTextDrawShow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0]);
-		PlayerTextDrawShow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1]);
-		PlayerTextDrawShow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE]);
-		PlayerTextDrawShow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED]);
+		PlayerTextDrawShow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0]);
+		PlayerTextDrawShow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1]);
+		PlayerTextDrawShow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE]);
+		PlayerTextDrawShow(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED]);
 		new vehName[128];
 		format(vehName, sizeof(vehName), "~w~%v", GetVehicleModel(GetPlayerVehicleID(playerid)));
-		PlayerTextDrawSetString(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE], vehName);
-		gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERIS_SHOWN] = true;
+		PlayerTextDrawSetString(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE], vehName);
+		gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_IS_SHOWN] = true;
 	}
 	if ((newstate != PLAYER_STATE_DRIVER) && (newstate != PLAYER_STATE_PASSENGER))
 	{
-		PlayerTextDrawHide(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][0]);
-		PlayerTextDrawHide(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERTITLE][1]);
-		PlayerTextDrawHide(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERVEHICLE]);
-		PlayerTextDrawHide(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED]);
-		gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERIS_SHOWN] = false;
+		PlayerTextDrawHide(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][0]);
+		PlayerTextDrawHide(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_TITLE][1]);
+		PlayerTextDrawHide(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_VEHICLE]);
+		PlayerTextDrawHide(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED]);
+		gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_IS_SHOWN] = false;
 	}
 
 	return Y_HOOKS_CONTINUE_RETURN_1;
@@ -307,7 +309,9 @@ hook OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 	{
 		#pragma unused dialogID, listitem, inputtext
 		
-		if (!response) return Y_HOOKS_CONTINUE_RETURN_0;
+		if (!response) {
+			return Y_HOOKS_CONTINUE_RETURN_0;
+		}
 
 		SetPlayerPos(playerID, fX, fY, fZ);
 		SendClientMessage(playerID, X11_FOREST_GREEN, !"You just teleported to the position you marked on map");
@@ -320,7 +324,7 @@ hook OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 
 ptask UpdatePlayerVehicleSpeed[100](playerid) 
 {
-	if (gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERIS_SHOWN])
+	if (gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_IS_SHOWN])
 	{
 		new 
 			Float:velX,
@@ -336,7 +340,7 @@ ptask UpdatePlayerVehicleSpeed[100](playerid)
 		new speedAsString[9];
 		format(speedAsString, sizeof(speedAsString), "%i_KM/H", floatround(vehSpeed, floatround_floor));
 
-		PlayerTextDrawSetString(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETERSPEED], speedAsString);
+		PlayerTextDrawSetString(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED], speedAsString);
 	}
 }
 
@@ -421,7 +425,9 @@ YCMD:teleport(playerid, cmdtext[], help)
 		{
 			#pragma unused dialogID, inputtext
 			
-			if (!response) return 0;
+			if (!response) {
+				return 0;
+			}
 
 			if (GetPlayerVehicleSeat(playerid) == 0)
 			{
@@ -475,7 +481,9 @@ YCMD:skin(playerid, cmdtext[], help)
 		{
 			#pragma unused dialogID, listitem
 
-			if (!response) return 0;
+			if (!response) {
+				return 0;
+			}
 
 			new skinid;
 			skinid = strval(inputtext);
@@ -487,7 +495,9 @@ YCMD:skin(playerid, cmdtext[], help)
 			new const vehID = GetPlayerVehicleID(playerID);
 			new const vehSeat = GetPlayerVehicleSeat(playerID);
 			SetPlayerSkin(playerID, skinid);
-			if (vehID != -1) PutPlayerInVehicle(playerID, vehID, vehSeat);
+			if (vehID != -1) {
+				PutPlayerInVehicle(playerID, vehID, vehSeat);
+			}
 			va_SendClientMessage(playerID, X11_FOREST_GREEN, "You successfully changed your skin id to " CORAL "%d", skinid);
 		}
 		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, !"Input a skin ID", !"Input the skin ID you want to select", !"Next", !"Cancel");
@@ -507,7 +517,9 @@ YCMD:vehicle(playerid, cmdtext[], help)
 		{
 			#pragma unused dialogID, listitem
 
-			if (!response) return 0;
+			if (!response) {
+				return 0;
+			}
 
 			new vehicleid;
 			vehicleid = strval(inputtext);
@@ -568,12 +580,16 @@ YCMD:virtualworld(playerid, cmdtext[], help)
 		{
 			#pragma unused dialogID, listitem
 
-			if (!response) return 0;
+			if (!response) {
+				return 0;
+			}
 
 			new const worldID = strval(inputtext);
 			new vehID = GetPlayerVehicleID(playerID);
 			new vehSeat = GetPlayerVehicleSeat(playerID);
-			if (vehID != -1) PutPlayerInVehicle(playerID, vehID, vehSeat);
+			if (vehID != -1) {
+				PutPlayerInVehicle(playerID, vehID, vehSeat);
+			}
 			SetVehicleVirtualWorld(vehID, worldID);
 			SetPlayerVirtualWorld(playerID, worldID);
 			va_SendClientMessage(playerID, X11_FOREST_GREEN, "You changed your virtual world to " CORAL "%d", worldID);
@@ -726,7 +742,9 @@ YCMD:goto(playerid, cmdtext[], help)
 		{
 			#pragma unused dialogID, listitem
 
-			if (!response) return 0;
+			if (!response) {
+				return 0;
+			}
 
 			new pid;
 			pid = strval(inputtext);
@@ -777,7 +795,9 @@ YCMD:requests(playerid, cmdtext[], help)
 		{
 			#pragma unused dialogID, inputtext
 
-			if (!response) return 0;
+			if (!response) {
+				return 0;
+			}
 
 			new requesterIDs[MAX_PLAYERS];
 			foreach (new i : gPlayerTPRequests[playerID])
