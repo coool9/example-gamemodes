@@ -361,18 +361,16 @@ YCMD:help(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "help");
+		return 1;
+	}
+	if (isnull(cmdtext))
+	{
+		SendClientMessage(playerid, X11_FOREST_GREEN, "Usage of the help command is "/help <command>"");
+		SendClientMessage(playerid, X11_FOREST_GREEN, "Example usage: /help commands");
 	}
 	else
 	{
-		if (isnull(cmdtext))
-		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, "Usage of the help command is \"/help <command>\"");
-			SendClientMessage(playerid, X11_FOREST_GREEN, "Example usage: /help commands");
-		}
-		else
-		{
-			Command_ReProcess(playerid, cmdtext, true);
-		}
+		Command_ReProcess(playerid, cmdtext, true);
 	}
 	return 1;
 }
@@ -382,19 +380,17 @@ YCMD:heal(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "heal");
+		return 1;
+	}
+	SetPlayerHealth(playerid, 100.0);
+	if (GetPlayerVehicleSeat(playerid) == 0)
+	{
+		RepairVehicle(GetPlayerVehicleID(playerid));
+		SendClientMessage(playerid, X11_FOREST_GREEN, "Your health was filled and the car was repaired");
 	}
 	else
 	{
-		SetPlayerHealth(playerid, 100.0);
-		if (GetPlayerVehicleSeat(playerid) == 0)
-		{
-			RepairVehicle(GetPlayerVehicleID(playerid));
-			SendClientMessage(playerid, X11_FOREST_GREEN, "Your health was filled and the car was repaired");
-		}
-		else
-		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, "Your health was filled");
-		}
+		SendClientMessage(playerid, X11_FOREST_GREEN, "Your health was filled");
 	}
 	return 1;
 }
@@ -403,13 +399,11 @@ YCMD:kill(playerid, cmdtext[], help)
 {
 	if (help)
 	{
-		ShowCommandHelp(playerid, "kill");	
+		ShowCommandHelp(playerid, "kill");
+		return 1;
 	}
-	else
-	{
-		SetPlayerHealth(playerid, 0.0);
-		SendClientMessage(playerid, X11_FOREST_GREEN, "You killed yourself");
-	}
+	SetPlayerHealth(playerid, 0.0);
+	SendClientMessage(playerid, X11_FOREST_GREEN, "You killed yourself");
 	return 1;
 }
 
@@ -418,54 +412,52 @@ YCMD:teleport(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "teleport");
+		return 1;
 	}
-	else
+	inline _response(playerID, dialogID, response, listitem, string:inputtext[])
 	{
-		inline _response(playerID, dialogID, response, listitem, string:inputtext[])
-		{
-			#pragma unused dialogID, inputtext
-			
-			if (!response) {
-				return 0;
-			}
+		#pragma unused dialogID, inputtext
+		
+		if (!response) {
+			return 0;
+		}
 
-			if (GetPlayerVehicleSeat(playerid) == 0)
-			{
-				SetVehiclePos(
-					GetPlayerVehicleID(playerid),
-					gServerSpawns[listitem][E_SPAWN_POS_X],
-					gServerSpawns[listitem][E_SPAWN_POS_Y],
-					gServerSpawns[listitem][E_SPAWN_POS_Z]
-				);
-			}
-			else
-			{
-				SetPlayerPos(
-					playerID,
-					gServerSpawns[listitem][E_SPAWN_POS_X],
-					gServerSpawns[listitem][E_SPAWN_POS_Y],
-					gServerSpawns[listitem][E_SPAWN_POS_Z]
-				);
-				SetPlayerFacingAngle(playerID, gServerSpawns[listitem][E_SPAWN_POS_A]);
-			}
-			va_SendClientMessage(playerid, X11_FOREST_GREEN, "You just teleported to %s", gServerSpawns[listitem][E_SPAWN_NAME]);
-		}
-		new list[128];
-		for (new in = 0; in != sizeof gServerSpawns; in++)
+		if (GetPlayerVehicleSeat(playerid) == 0)
 		{
-			if (list[0] == EOS)
-			{
-				strins(list, gServerSpawns[in][E_SPAWN_NAME], 0);
-			}
-			else
-			{
-				new listItem[MAX_SPAWN_NAME];
-				format(listItem, sizeof(listItem), "\n%s", gServerSpawns[in][E_SPAWN_NAME]);
-				strcat(list, listItem);
-			}
+			SetVehiclePos(
+				GetPlayerVehicleID(playerid),
+				gServerSpawns[listitem][E_SPAWN_POS_X],
+				gServerSpawns[listitem][E_SPAWN_POS_Y],
+				gServerSpawns[listitem][E_SPAWN_POS_Z]
+			);
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_LIST, "Select where you want to teleport", list, "TP", "Abort");
+		else
+		{
+			SetPlayerPos(
+				playerID,
+				gServerSpawns[listitem][E_SPAWN_POS_X],
+				gServerSpawns[listitem][E_SPAWN_POS_Y],
+				gServerSpawns[listitem][E_SPAWN_POS_Z]
+			);
+			SetPlayerFacingAngle(playerID, gServerSpawns[listitem][E_SPAWN_POS_A]);
+		}
+		va_SendClientMessage(playerid, X11_FOREST_GREEN, "You just teleported to %s", gServerSpawns[listitem][E_SPAWN_NAME]);
 	}
+	new list[128];
+	for (new in = 0; in != sizeof gServerSpawns; in++)
+	{
+		if (list[0] == EOS)
+		{
+			strins(list, gServerSpawns[in][E_SPAWN_NAME], 0);
+		}
+		else
+		{
+			new listItem[MAX_SPAWN_NAME];
+			format(listItem, sizeof(listItem), "\n%s", gServerSpawns[in][E_SPAWN_NAME]);
+			strcat(list, listItem);
+		}
+	}
+	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_LIST, "Select where you want to teleport", list, "TP", "Abort");
 	return 1;
 }
 
@@ -474,34 +466,32 @@ YCMD:skin(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "skin");
+		return 1;
 	}
-	else
+	inline _response(playerID, dialogID, response, listitem, string:inputtext[])
 	{
-		inline _response(playerID, dialogID, response, listitem, string:inputtext[])
-		{
-			#pragma unused dialogID, listitem
+		#pragma unused dialogID, listitem
 
-			if (!response) {
-				return 0;
-			}
-
-			new skinid;
-			skinid = strval(inputtext);
-			if (skinid < 1 || skinid > 311)
-			{
-				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid skin ID", "Valid skin IDs are from 1 to 311.\nInput the skin ID you want to select", "Next", "Cancel");
-				return 0;
-			}
-			new const vehID = GetPlayerVehicleID(playerID);
-			new const vehSeat = GetPlayerVehicleSeat(playerID);
-			SetPlayerSkin(playerID, skinid);
-			if (vehID != -1) {
-				PutPlayerInVehicle(playerID, vehID, vehSeat);
-			}
-			va_SendClientMessage(playerID, X11_FOREST_GREEN, "You successfully changed your skin id to " CORAL "%d", skinid);
+		if (!response) {
+			return 0;
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a skin ID", "Input the skin ID you want to select", "Next", "Cancel");
+
+		new skinid;
+		skinid = strval(inputtext);
+		if (skinid < 1 || skinid > 311)
+		{
+			Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid skin ID", "Valid skin IDs are from 1 to 311.\nInput the skin ID you want to select", "Next", "Cancel");
+			return 0;
+		}
+		new const vehID = GetPlayerVehicleID(playerID);
+		new const vehSeat = GetPlayerVehicleSeat(playerID);
+		SetPlayerSkin(playerID, skinid);
+		if (vehID != -1) {
+			PutPlayerInVehicle(playerID, vehID, vehSeat);
+		}
+		va_SendClientMessage(playerID, X11_FOREST_GREEN, "You successfully changed your skin id to " CORAL "%d", skinid);
 	}
+	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a skin ID", "Input the skin ID you want to select", "Next", "Cancel");
 	return 1;
 }
 
@@ -510,40 +500,38 @@ YCMD:vehicle(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "vehicle");
+		return 1;
 	}
-	else
+	inline _response(playerID, dialogID, response, listitem, string:inputtext[])
 	{
-		inline _response(playerID, dialogID, response, listitem, string:inputtext[])
-		{
-			#pragma unused dialogID, listitem
+		#pragma unused dialogID, listitem
 
-			if (!response) {
-				return 0;
-			}
-
-			new vehicleid;
-			vehicleid = strval(inputtext);
-			if (vehicleid < 400 || vehicleid > 611)
-			{
-				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid vehicle ID", "Valid vehicle IDs are from 400 to 611, but there are also exceptions.\nInput the vehicle ID you want to spawn", "Next", "Cancel");
-				return 0;
-			}
-			new Float:posX, Float:posY, Float:posZ, Float:posA;
-			GetPlayerPos(playerID, posX, posY, posZ);
-			GetPlayerFacingAngle(playerID, posA);
-			new vehID = CreateVehicle(vehicleid, posX+0.8, posY+0.2, posZ, posA, -1, -1, -1);
-			SetVehicleNumberPlate(vehID, "NGS");
-			SetVehicleVirtualWorld(
-				vehID,
-				GetPlayerVirtualWorld(playerID)
-			);
-			AddVehicleComponent(vehID, 1010);
-			new msg[128];
-			format(msg, sizeof(msg), "You just spawned "SALMON"%v "FOREST_GREEN" ("SALMON"%d"FOREST_GREEN")", vehicleid, vehicleid);
-			SendClientMessage(playerid, X11_FOREST_GREEN, msg);
+		if (!response) {
+			return 0;
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a vehicle ID", "Input the vehicle ID you want to spawn", "Next", "Cancel");
+
+		new vehicleid;
+		vehicleid = strval(inputtext);
+		if (vehicleid < 400 || vehicleid > 611)
+		{
+			Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid vehicle ID", "Valid vehicle IDs are from 400 to 611, but there are also exceptions.\nInput the vehicle ID you want to spawn", "Next", "Cancel");
+			return 0;
+		}
+		new Float:posX, Float:posY, Float:posZ, Float:posA;
+		GetPlayerPos(playerID, posX, posY, posZ);
+		GetPlayerFacingAngle(playerID, posA);
+		new vehID = CreateVehicle(vehicleid, posX+0.8, posY+0.2, posZ, posA, -1, -1, -1);
+		SetVehicleNumberPlate(vehID, "NGS");
+		SetVehicleVirtualWorld(
+			vehID,
+			GetPlayerVirtualWorld(playerID)
+		);
+		AddVehicleComponent(vehID, 1010);
+		new msg[128];
+		format(msg, sizeof(msg), "You just spawned "SALMON"%v "FOREST_GREEN" ("SALMON"%d"FOREST_GREEN")", vehicleid, vehicleid);
+		SendClientMessage(playerid, X11_FOREST_GREEN, msg);
 	}
+	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a vehicle ID", "Input the vehicle ID you want to spawn", "Next", "Cancel");
 	return 1;
 }
 
@@ -552,18 +540,16 @@ YCMD:destroyvehicle(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "destroyvehicle");
+		return 1;
+	}
+	if (GetPlayerVehicleSeat(playerid) == 0)
+	{
+		DestroyVehicle(GetPlayerVehicleID(playerid));
+		SendClientMessage(playerid, X11_FOREST_GREEN, "You just destroyed a vehicle");
 	}
 	else
 	{
-		if (GetPlayerVehicleSeat(playerid) == 0)
-		{
-			DestroyVehicle(GetPlayerVehicleID(playerid));
-			SendClientMessage(playerid, X11_FOREST_GREEN, "You just destroyed a vehicle");
-		}
-		else
-		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, "You must be in the driver's seat of a vehicle to destroy it");
-		}
+		SendClientMessage(playerid, X11_FOREST_GREEN, "You must be in the driver's seat of a vehicle to destroy it");
 	}
 	return 1;
 }
@@ -573,29 +559,27 @@ YCMD:virtualworld(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "virtualworld");
+		return 1;
 	}
-	else
+	inline _response(playerID, dialogID, response, listitem, string:inputtext[])
 	{
-		inline _response(playerID, dialogID, response, listitem, string:inputtext[])
-		{
-			#pragma unused dialogID, listitem
+		#pragma unused dialogID, listitem
 
-			if (!response) {
-				return 0;
-			}
-
-			new const worldID = strval(inputtext);
-			new vehID = GetPlayerVehicleID(playerID);
-			new vehSeat = GetPlayerVehicleSeat(playerID);
-			if (vehID != -1) {
-				PutPlayerInVehicle(playerID, vehID, vehSeat);
-			}
-			SetVehicleVirtualWorld(vehID, worldID);
-			SetPlayerVirtualWorld(playerID, worldID);
-			va_SendClientMessage(playerID, X11_FOREST_GREEN, "You changed your virtual world to " CORAL "%d", worldID);
+		if (!response) {
+			return 0;
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a virtual world ID", "Input the virtual world ID you want to move to", "Go", "Cancel");
+
+		new const worldID = strval(inputtext);
+		new vehID = GetPlayerVehicleID(playerID);
+		new vehSeat = GetPlayerVehicleSeat(playerID);
+		if (vehID != -1) {
+			PutPlayerInVehicle(playerID, vehID, vehSeat);
+		}
+		SetVehicleVirtualWorld(vehID, worldID);
+		SetPlayerVirtualWorld(playerID, worldID);
+		va_SendClientMessage(playerID, X11_FOREST_GREEN, "You changed your virtual world to " CORAL "%d", worldID);
 	}
+	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a virtual world ID", "Input the virtual world ID you want to move to", "Go", "Cancel");
 	return 1;
 }
 
@@ -604,28 +588,26 @@ YCMD:savepos(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "savepos");
+		return 1;
+	}
+	new Float:x, Float:y, Float:z, Float:a;
+	if (GetPlayerVehicleSeat(playerid) == 0)
+	{
+		GetVehiclePos(GetPlayerVehicleID(playerid), x, y, z);
+		SetPVarFloat(playerid, "vehX", x);
+		SetPVarFloat(playerid, "vehY", y);
+		SetPVarFloat(playerid, "vehZ", z);
 	}
 	else
 	{
-		new Float:x, Float:y, Float:z, Float:a;
-		if (GetPlayerVehicleSeat(playerid) == 0)
-		{
-			GetVehiclePos(GetPlayerVehicleID(playerid), x, y, z);
-			SetPVarFloat(playerid, "vehX", x);
-			SetPVarFloat(playerid, "vehY", y);
-			SetPVarFloat(playerid, "vehZ", z);
-		}
-		else
-		{
-			GetPlayerPos(playerid, x, y, z);
-			GetPlayerFacingAngle(playerid, a);
-			SetPVarFloat(playerid, "posX", x);
-			SetPVarFloat(playerid, "posY", y);
-			SetPVarFloat(playerid, "posZ", z);
-			SetPVarFloat(playerid, "posA", a);
-		}
-		SendClientMessage(playerid, X11_FOREST_GREEN, "You just saved your current position, use /pos to teleport there anytime");
+		GetPlayerPos(playerid, x, y, z);
+		GetPlayerFacingAngle(playerid, a);
+		SetPVarFloat(playerid, "posX", x);
+		SetPVarFloat(playerid, "posY", y);
+		SetPVarFloat(playerid, "posZ", z);
+		SetPVarFloat(playerid, "posA", a);
 	}
+	SendClientMessage(playerid, X11_FOREST_GREEN, "You just saved your current position, use /pos to teleport there anytime");
 	return 1;
 }
 
@@ -634,38 +616,36 @@ YCMD:pos(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "pos");
+		return 1;
+	}
+	new Float:x, Float:y, Float:z, Float:a;
+	if (GetPlayerVehicleSeat(playerid) == 0)
+	{
+		x = GetPVarFloat(playerid, "vehX");
+		y = GetPVarFloat(playerid, "vehY");
+		z = GetPVarFloat(playerid, "vehZ");
+		if (!(x != 0.0 && y != 0.0 && z != 0.0))
+		{
+			SendClientMessage(playerid, X11_FOREST_GREEN, "You have not saved any in-vehicle position yet");
+			return 3;
+		}
+		SetVehiclePos(GetPlayerVehicleID(playerid), x, y, z);
 	}
 	else
 	{
-		new Float:x, Float:y, Float:z, Float:a;
-		if (GetPlayerVehicleSeat(playerid) == 0)
+		x = GetPVarFloat(playerid, "posX");
+		y = GetPVarFloat(playerid, "posY");
+		z = GetPVarFloat(playerid, "posZ");
+		a = GetPVarFloat(playerid, "posA");
+		if (!(x != 0.0 && y != 0.0 && z != 0.0))
 		{
-			x = GetPVarFloat(playerid, "vehX");
-			y = GetPVarFloat(playerid, "vehY");
-			z = GetPVarFloat(playerid, "vehZ");
-			if (!(x != 0.0 && y != 0.0 && z != 0.0))
-			{
-				SendClientMessage(playerid, X11_FOREST_GREEN, "You have not saved any in-vehicle position yet");
-				return 3;
-			}
-			SetVehiclePos(GetPlayerVehicleID(playerid), x, y, z);
+			SendClientMessage(playerid, X11_FOREST_GREEN, "You have not saved any on-foot position yet");
+			return 3;
 		}
-		else
-		{
-			x = GetPVarFloat(playerid, "posX");
-			y = GetPVarFloat(playerid, "posY");
-			z = GetPVarFloat(playerid, "posZ");
-			a = GetPVarFloat(playerid, "posA");
-			if (!(x != 0.0 && y != 0.0 && z != 0.0))
-			{
-				SendClientMessage(playerid, X11_FOREST_GREEN, "You have not saved any on-foot position yet");
-				return 3;
-			}
-			SetPlayerPos(playerid, x, y, z);
-			SetPlayerFacingAngle(playerid, a);
-		}
-		SendClientMessage(playerid, X11_FOREST_GREEN, "You just telepeorted to your saved position");
+		SetPlayerPos(playerid, x, y, z);
+		SetPlayerFacingAngle(playerid, a);
 	}
+	SendClientMessage(playerid, X11_FOREST_GREEN, "You just telepeorted to your saved position");
 	return 1;
 }
 
@@ -674,37 +654,35 @@ YCMD:commands(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "commands");
+		return 1;
 	}
-	else
+	new commands[128];
+	for (new i = 0; i != Command_GetPlayerCommandCount(playerid); i++)
 	{
-		new commands[128];
-		for (new i = 0; i != Command_GetPlayerCommandCount(playerid); i++)
+		new cmdName[YSI_MAX_STRING];
+		cmdName = Command_GetNext(i, playerid);
+		new bool:isAlt = false;
+		for (new in = 0; in != 14; in++)
 		{
-			new cmdName[YSI_MAX_STRING];
-			cmdName = Command_GetNext(i, playerid);
-			new bool:isAlt = false;
-			for (new in = 0; in != 14; in++)
+			if (isnull(gServerCommands[in][E_COMMAND_ALIAS]))
 			{
-				if (isnull(gServerCommands[in][E_COMMAND_ALIAS]))
-				{
-					continue;
-				}
-				else if (!strcmp(cmdName, gServerCommands[in][E_COMMAND_ALIAS]))
-				{
-					isAlt = true;
-					break;
-				}
+				continue;
 			}
-			if (!isAlt)
+			else if (!strcmp(cmdName, gServerCommands[in][E_COMMAND_ALIAS]))
 			{
-				new fmt[MAX_COMMAND_LENGTH + 3];
-				format(fmt, sizeof fmt, "/%s ", cmdName);
-				strcat(commands, fmt);
+				isAlt = true;
+				break;
 			}
 		}
-		SendClientMessage(playerid, X11_GOLDENROD, "All the available commands are:");
-		SendClientMessage(playerid, X11_GOLDENROD, commands);
+		if (!isAlt)
+		{
+			new fmt[MAX_COMMAND_LENGTH + 3];
+			format(fmt, sizeof fmt, "/%s ", cmdName);
+			strcat(commands, fmt);
+		}
 	}
+	SendClientMessage(playerid, X11_GOLDENROD, "All the available commands are:");
+	SendClientMessage(playerid, X11_GOLDENROD, commands);
 	return 1;
 }
 
@@ -713,18 +691,16 @@ YCMD:alts(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "alts");
+		return 1;
 	}
-	else
+	SendClientMessage(playerid, X11_GOLDENROD, "Commands with alternative names are:");
+	for (new in = 0; in != sizeof gServerCommands; in++)
 	{
-		SendClientMessage(playerid, X11_GOLDENROD, "Commands with alternative names are:");
-		for (new in = 0; in != sizeof gServerCommands; in++)
+		if (!isnull(gServerCommands[in][E_COMMAND_ALIAS]))
 		{
-			if (!isnull(gServerCommands[in][E_COMMAND_ALIAS]))
-			{
-				new msg[128];
-				format(msg, sizeof(msg), "/%s (/%s)", gServerCommands[in][E_COMMAND_NAME], gServerCommands[in][E_COMMAND_ALIAS]);
-				SendClientMessage(playerid, X11_GOLDENROD, msg);
-			}
+			new msg[128];
+			format(msg, sizeof(msg), "/%s (/%s)", gServerCommands[in][E_COMMAND_NAME], gServerCommands[in][E_COMMAND_ALIAS]);
+			SendClientMessage(playerid, X11_GOLDENROD, msg);
 		}
 	}
 	return 1;
@@ -735,46 +711,44 @@ YCMD:goto(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "goto");
+		return 1;
 	}
-	else
+	inline _response(playerID, dialogID, response, listitem, string:inputtext[])
 	{
-		inline _response(playerID, dialogID, response, listitem, string:inputtext[])
-		{
-			#pragma unused dialogID, listitem
+		#pragma unused dialogID, listitem
 
-			if (!response) {
-				return 0;
-			}
-
-			new pid;
-			pid = strval(inputtext);
-			if (pid < 0 || pid > (MAX_PLAYERS - 1))
-			{
-				Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid player ID", "Valid player id can be from 0 to 999\nInput the player id you want to teleport to", "TP", "Abort");
-				return 0;
-			}
-			if (!IsPlayerConnected(pid))
-			{
-				va_SendClientMessage(playerID, X11_FOREST_GREEN, "A player with id "CORAL"%d "FOREST_GREEN"is not connected", pid);
-				return 0;
-			}
-			if (pid == playerID)
-			{
-				SendClientMessage(playerID, X11_FOREST_GREEN, "You can't request a teleport with yourself");
-				return 0;
-			}
-
-			Iter_Add(gPlayerTPRequests[pid], playerID);
-			
-			new requesterName[MAX_PLAYER_NAME + 1], requestedName[MAX_PLAYER_NAME + 1];
-			GetPlayerName(playerID, requesterName, sizeof(requesterName));
-			GetPlayerName(pid, requestedName, sizeof(requestedName));
-			va_SendClientMessage(playerID, X11_FOREST_GREEN, "You requested a teleport to " CORAL "%s", requestedName);
-			va_SendClientMessage(pid, X11_FOREST_GREEN, ""CORAL"%s "FOREST_GREEN"has requested to teleport to you", requesterName);
-			defer CheckPlayerTPRequest(pid, playerID);
+		if (!response) {
+			return 0;
 		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a player id", "Input the player id you want to teleport to", "TP", "Abort");
+
+		new pid;
+		pid = strval(inputtext);
+		if (pid < 0 || pid > (MAX_PLAYERS - 1))
+		{
+			Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid player ID", "Valid player id can be from 0 to 999\nInput the player id you want to teleport to", "TP", "Abort");
+			return 0;
+		}
+		if (!IsPlayerConnected(pid))
+		{
+			va_SendClientMessage(playerID, X11_FOREST_GREEN, "A player with id "CORAL"%d "FOREST_GREEN"is not connected", pid);
+			return 0;
+		}
+		if (pid == playerID)
+		{
+			SendClientMessage(playerID, X11_FOREST_GREEN, "You can't request a teleport with yourself");
+			return 0;
+		}
+
+		Iter_Add(gPlayerTPRequests[pid], playerID);
+		
+		new requesterName[MAX_PLAYER_NAME + 1], requestedName[MAX_PLAYER_NAME + 1];
+		GetPlayerName(playerID, requesterName, sizeof(requesterName));
+		GetPlayerName(pid, requestedName, sizeof(requestedName));
+		va_SendClientMessage(playerID, X11_FOREST_GREEN, "You requested a teleport to " CORAL "%s", requestedName);
+		va_SendClientMessage(pid, X11_FOREST_GREEN, ""CORAL"%s "FOREST_GREEN"has requested to teleport to you", requesterName);
+		defer CheckPlayerTPRequest(pid, playerID);
 	}
+	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a player id", "Input the player id you want to teleport to", "TP", "Abort");
 	return 1;
 }
 
@@ -783,90 +757,88 @@ YCMD:requests(playerid, cmdtext[], help)
 	if (help)
 	{
 		ShowCommandHelp(playerid, "requests");
+		return 1;
 	}
-	else
+	if (Iter_Count(gPlayerTPRequests[playerid]) == 0)
 	{
-		if (Iter_Count(gPlayerTPRequests[playerid]) == 0)
-		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, "You don't have any teleport request");
-			return 3;
-		}
-		inline _response(playerID, dialogID, response, listitem, string:inputtext[])
-		{
-			#pragma unused dialogID, inputtext
-
-			if (!response) {
-				return 0;
-			}
-
-			new requesterIDs[MAX_PLAYERS];
-			foreach (new i : gPlayerTPRequests[playerID])
-			{
-				static in = 0;
-				requesterIDs[in] = i;
-				in++;
-			}
-			new const sPlayerID = requesterIDs[listitem];
-			if (!Iter_Contains(gPlayerTPRequests[playerID], sPlayerID))
-			{
-				SendClientMessage(playerid, X11_FOREST_GREEN, "That player might have disconnected or the request expirted");
-				return 1;
-			}
-			new
-				requesterName[MAX_PLAYER_NAME + 1],
-				playerName[MAX_PLAYER_NAME + 1],
-				playerVW,
-				Float:x,
-				Float:y,
-				Float:z,
-				Float:a
-			;
-
-			GetPlayerPos(playerID, x, y, z);
-			GetPlayerFacingAngle(playerID, a);
-			GetPlayerName(playerID, playerName, sizeof(playerName));
-			playerVW = GetPlayerVirtualWorld(playerID);
-			x += 0.5;
-
-			GetPlayerName(sPlayerID, requesterName, sizeof(requesterName));
-			
-			va_SendClientMessage(playerID, X11_FOREST_GREEN, "You've accepted "CORAL"%s's "FOREST_GREEN"teleport request", requesterName);
-			va_SendClientMessage(sPlayerID, X11_FOREST_GREEN, ""CORAL"%s "FOREST_GREEN"has just accepted your teleport request", playerName);
-			
-			if (GetPlayerVehicleSeat(sPlayerID) == 0)
-			{
-				new const sPlayerVehicleID = GetPlayerVehicleID(sPlayerID);
-				SetVehicleVirtualWorld(sPlayerVehicleID, playerVW);
-				SetPlayerVirtualWorld(sPlayerID, playerVW);
-				SetVehiclePos(sPlayerVehicleID, x, y, z);
-			}
-			else
-			{
-				SetPlayerPos(sPlayerID, x, y, z);
-				SetPlayerFacingAngle(sPlayerID, a);
-				SetPlayerVirtualWorld(sPlayerID, playerVW);
-			}
-
-			Iter_Remove(gPlayerTPRequests[playerID], sPlayerID);
-		}
-		new list[YSI_MAX_STRING];
-		for (new it = Iter_First(gPlayerTPRequests[playerid]); it != Iter_End(gPlayerTPRequests[playerid]); it = Iter_Next(gPlayerTPRequests[playerid], it))
-		{
-			new pName[MAX_PLAYER_NAME];
-			GetPlayerName(it, pName, sizeof(pName));
-			if (list[0] == EOS)
-			{
-				strins(list, pName, 0);
-			}
-			else
-			{
-				new listItem[MAX_PLAYER_NAME + 3];
-				format(listItem, sizeof(listItem), "\n%s", pName);
-				strcat(list, listItem);
-			}
-		}
-		Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_LIST, "Select whose teleport request to accept", list, "Select", "Abort");
+		SendClientMessage(playerid, X11_FOREST_GREEN, "You don't have any teleport request");
+		return 3;
 	}
+	inline _response(playerID, dialogID, response, listitem, string:inputtext[])
+	{
+		#pragma unused dialogID, inputtext
+
+		if (!response) {
+			return 0;
+		}
+
+		new requesterIDs[MAX_PLAYERS];
+		foreach (new i : gPlayerTPRequests[playerID])
+		{
+			static in = 0;
+			requesterIDs[in] = i;
+			in++;
+		}
+		new const sPlayerID = requesterIDs[listitem];
+		if (!Iter_Contains(gPlayerTPRequests[playerID], sPlayerID))
+		{
+			SendClientMessage(playerid, X11_FOREST_GREEN, "That player might have disconnected or the request expirted");
+			return 1;
+		}
+		new
+			requesterName[MAX_PLAYER_NAME + 1],
+			playerName[MAX_PLAYER_NAME + 1],
+			playerVW,
+			Float:x,
+			Float:y,
+			Float:z,
+			Float:a
+		;
+
+		GetPlayerPos(playerID, x, y, z);
+		GetPlayerFacingAngle(playerID, a);
+		GetPlayerName(playerID, playerName, sizeof(playerName));
+		playerVW = GetPlayerVirtualWorld(playerID);
+		x += 0.5;
+
+		GetPlayerName(sPlayerID, requesterName, sizeof(requesterName));
+		
+		va_SendClientMessage(playerID, X11_FOREST_GREEN, "You've accepted "CORAL"%s's "FOREST_GREEN"teleport request", requesterName);
+		va_SendClientMessage(sPlayerID, X11_FOREST_GREEN, ""CORAL"%s "FOREST_GREEN"has just accepted your teleport request", playerName);
+		
+		if (GetPlayerVehicleSeat(sPlayerID) == 0)
+		{
+			new const sPlayerVehicleID = GetPlayerVehicleID(sPlayerID);
+			SetVehicleVirtualWorld(sPlayerVehicleID, playerVW);
+			SetPlayerVirtualWorld(sPlayerID, playerVW);
+			SetVehiclePos(sPlayerVehicleID, x, y, z);
+		}
+		else
+		{
+			SetPlayerPos(sPlayerID, x, y, z);
+			SetPlayerFacingAngle(sPlayerID, a);
+			SetPlayerVirtualWorld(sPlayerID, playerVW);
+		}
+
+		Iter_Remove(gPlayerTPRequests[playerID], sPlayerID);
+	}
+	new list[YSI_MAX_STRING];
+	for (new it = Iter_First(gPlayerTPRequests[playerid]); it != Iter_End(gPlayerTPRequests[playerid]); it = Iter_Next(gPlayerTPRequests[playerid], it))
+	{
+		new pName[MAX_PLAYER_NAME];
+		GetPlayerName(it, pName, sizeof(pName));
+		if (list[0] == EOS)
+		{
+			strins(list, pName, 0);
+		}
+		else
+		{
+			new listItem[MAX_PLAYER_NAME + 3];
+			format(listItem, sizeof(listItem), "\n%s", pName);
+			strcat(list, listItem);
+		}
+	}
+	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_LIST, "Select whose teleport request to accept", list, "Select", "Abort");
 	return 1;
 }
 
