@@ -653,7 +653,7 @@ YCMD:pos(playerid, cmdtext[], help)
 		SetPlayerPos(playerid, x, y, z);
 		SetPlayerFacingAngle(playerid, a);
 	}
-	SendClientMessage(playerid, X11_FOREST_GREEN, "You just telepeorted to your saved position");
+	SendClientMessage(playerid, X11_FOREST_GREEN, "You just teleported to your saved position");
 	return 1;
 }
 
@@ -734,12 +734,12 @@ YCMD:goto(playerid, cmdtext[], help)
 		pid = strval(inputtext);
 		if (pid < 0 || pid > (MAX_PLAYERS - 1))
 		{
-			Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid player ID", "Valid player id can be from 0 to 999\nInput the player id you want to teleport to", "TP", "Abort");
+			Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid player ID", "Valid player ID can be from 0 to 999\nInput the player ID you want to teleport to", "TP", "Abort");
 			return 0;
 		}
 		if (!IsPlayerConnected(pid))
 		{
-			va_SendClientMessage(playerID, X11_FOREST_GREEN, "A player with id "CORAL"%d "FOREST_GREEN"is not connected", pid);
+			va_SendClientMessage(playerID, X11_FOREST_GREEN, "A player with ID "CORAL"%d "FOREST_GREEN"is not connected", pid);
 			return 0;
 		}
 		if (pid == playerID)
@@ -757,7 +757,7 @@ YCMD:goto(playerid, cmdtext[], help)
 		va_SendClientMessage(pid, X11_FOREST_GREEN, ""CORAL"%s "FOREST_GREEN"has requested to teleport to you", requesterName);
 		defer CheckPlayerTPRequest(pid, playerID);
 	}
-	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a player id", "Input the player id you want to teleport to", "TP", "Abort");
+	Dialog_ShowCallback(playerid, using inline _response, DIALOG_STYLE_INPUT, "Input a player ID", "Input the player ID you want to teleport to", "TP", "Abort");
 	return 1;
 }
 
@@ -792,7 +792,7 @@ YCMD:requests(playerid, cmdtext[], help)
 		new const sPlayerID = requesterIDs[listitem];
 		if (!Iter_Contains(gPlayerTPRequests[playerID], sPlayerID))
 		{
-			SendClientMessage(playerid, X11_FOREST_GREEN, "That player might have disconnected or the request expirted");
+			SendClientMessage(playerid, X11_FOREST_GREEN, "That player might have disconnected or the request expired");
 			return 1;
 		}
 		new
