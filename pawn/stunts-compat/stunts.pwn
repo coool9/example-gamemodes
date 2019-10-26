@@ -143,7 +143,8 @@ hook OnScriptInit()
 
 	for(new id = 1; id != 312; id++)
 	{
-		if (id == 74) {
+		if (id == 74)
+		{
 			continue;
 		}
 		AddPlayerClass(id, 1514.7428, -2286.0576, 13.5469, 269.0387, 0, 0, 0, 0, 0, 0);
@@ -309,7 +310,8 @@ hook OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 	{
 		#pragma unused dialogID, listitem, inputtext
 		
-		if (!response) {
+		if (!response)
+		{
 			return Y_HOOKS_CONTINUE_RETURN_0;
 		}
 
@@ -418,7 +420,8 @@ YCMD:teleport(playerid, cmdtext[], help)
 	{
 		#pragma unused dialogID, inputtext
 		
-		if (!response) {
+		if (!response)
+		{
 			return 0;
 		}
 
@@ -472,7 +475,8 @@ YCMD:skin(playerid, cmdtext[], help)
 	{
 		#pragma unused dialogID, listitem
 
-		if (!response) {
+		if (!response)
+		{
 			return 0;
 		}
 
@@ -486,7 +490,8 @@ YCMD:skin(playerid, cmdtext[], help)
 		new const vehID = GetPlayerVehicleID(playerID);
 		new const vehSeat = GetPlayerVehicleSeat(playerID);
 		SetPlayerSkin(playerID, skinid);
-		if (vehID != -1) {
+		if (vehID != -1)
+		{
 			PutPlayerInVehicle(playerID, vehID, vehSeat);
 		}
 		va_SendClientMessage(playerID, X11_FOREST_GREEN, "You successfully changed your skin id to " CORAL "%d", skinid);
@@ -506,7 +511,8 @@ YCMD:vehicle(playerid, cmdtext[], help)
 	{
 		#pragma unused dialogID, listitem
 
-		if (!response) {
+		if (!response)
+		{
 			return 0;
 		}
 
@@ -565,14 +571,16 @@ YCMD:virtualworld(playerid, cmdtext[], help)
 	{
 		#pragma unused dialogID, listitem
 
-		if (!response) {
+		if (!response)
+		{
 			return 0;
 		}
 
 		new const worldID = strval(inputtext);
 		new vehID = GetPlayerVehicleID(playerID);
 		new vehSeat = GetPlayerVehicleSeat(playerID);
-		if (vehID != -1) {
+		if (vehID != -1)
+		{
 			PutPlayerInVehicle(playerID, vehID, vehSeat);
 		}
 		SetVehicleVirtualWorld(vehID, worldID);
@@ -717,7 +725,8 @@ YCMD:goto(playerid, cmdtext[], help)
 	{
 		#pragma unused dialogID, listitem
 
-		if (!response) {
+		if (!response)
+		{
 			return 0;
 		}
 
@@ -768,7 +777,8 @@ YCMD:requests(playerid, cmdtext[], help)
 	{
 		#pragma unused dialogID, inputtext
 
-		if (!response) {
+		if (!response)
+		{
 			return 0;
 		}
 
