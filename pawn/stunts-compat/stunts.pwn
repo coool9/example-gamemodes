@@ -734,7 +734,7 @@ YCMD:goto(playerid, cmdtext[], help)
 		pid = strval(inputtext);
 		if (!IsPlayerConnected(pid))
 		{
-			va_SendClientMessage(playerID, X11_FOREST_GREEN, "Either  player with ID "CORAL"%d "FOREST_GREEN"is not connected or "CORAL"%d "FOREST_GREEN"is not valid ID", pid);
+			va_SendClientMessage(playerID, X11_FOREST_GREEN, "Either a player with ID "CORAL"%d "FOREST_GREEN"is not connected or "CORAL"%d "FOREST_GREEN"is not valid ID", pid);
 			return 0;
 		}
 		if (pid == playerID)
