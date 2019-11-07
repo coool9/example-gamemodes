@@ -732,14 +732,9 @@ YCMD:goto(playerid, cmdtext[], help)
 
 		new pid;
 		pid = strval(inputtext);
-		if (pid < 0 || pid > (MAX_PLAYERS - 1))
-		{
-			Dialog_ShowCallback(playerID, using inline _response, DIALOG_STYLE_INPUT, "Input a valid player ID", "Valid player ID can be from 0 to 999\nInput the player ID you want to teleport to", "TP", "Abort");
-			return 0;
-		}
 		if (!IsPlayerConnected(pid))
 		{
-			va_SendClientMessage(playerID, X11_FOREST_GREEN, "A player with ID "CORAL"%d "FOREST_GREEN"is not connected", pid);
+			va_SendClientMessage(playerID, X11_FOREST_GREEN, "Either  player with ID "CORAL"%d "FOREST_GREEN"is not connected or "CORAL"%d "FOREST_GREEN"is not valid ID", pid);
 			return 0;
 		}
 		if (pid == playerID)
