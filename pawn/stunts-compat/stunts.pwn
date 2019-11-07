@@ -367,7 +367,7 @@ YCMD:help(playerid, cmdtext[], help)
 	}
 	if (isnull(cmdtext))
 	{
-		SendClientMessage(playerid, X11_FOREST_GREEN, "Usage of the help command is "/help <command>"");
+		SendClientMessage(playerid, X11_FOREST_GREEN, "Usage of the help command is \"/help <command>\"");
 		SendClientMessage(playerid, X11_FOREST_GREEN, "Example usage: /help commands");
 	}
 	else
