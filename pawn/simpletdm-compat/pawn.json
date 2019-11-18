@@ -1,0 +1,12 @@
+{
+	"user": "openmultiplayer",
+	"repo": "simpletdm-compat",
+	"entry": "simpletdm.pwn",
+	"output": "simpletdm.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib"
+	],
+	"contributors": [
+		"BrunoBM16"
+	]
+}
