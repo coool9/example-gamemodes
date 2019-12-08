@@ -132,7 +132,7 @@ hook OnScriptInit()
 	RegisterCommandInfo("alts", "lists the commands with the aliases");
 	RegisterCommandInfo("goto", "sends a player your teleport requests by inputting a valid player id", "g");
 	RegisterCommandInfo("requests", "lists who requested to teleported to you", "r");
-    
+
 	for (new in = 0; in != sizeof gServerCommands; in++)
 	{
 		if (!isnull(gServerCommands[in][E_COMMAND_ALIAS]))
@@ -149,7 +149,7 @@ hook OnScriptInit()
 		}
 		AddPlayerClass(id, 1514.7428, -2286.0576, 13.5469, 269.0387, 0, 0, 0, 0, 0, 0);
 	}
-    
+
 	Iter_Init(gPlayerTPRequests);
 
 	return Y_HOOKS_CONTINUE_RETURN_1;
@@ -227,7 +227,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	PlayerTextDrawDestroy(playerid, gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_SPEED]);
 
 	Iter_Clear(gPlayerTPRequests[playerid]);
-	
+
 	new const maxPlayerID = GetPlayerPoolSize();
 
 	for (new in = 0; in != maxPlayerID + 1; in++)
@@ -262,7 +262,7 @@ hook OnPlayerRequestClass(playerid, classid)
 	SetPlayerPos(playerid, 1514.7428, -2286.0576, 13.5469);
 	SetPlayerCameraPos(playerid, 1517.9448, -2285.8569 + 0.4, 13.3828);
 	SetPlayerCameraLookAt(playerid, 1514.7428, -2286.0576, 13.5469);
-	
+
 	return Y_HOOKS_CONTINUE_RETURN_1;
 }
 
@@ -309,13 +309,21 @@ hook OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 	inline _response(playerID, dialogID, response, listitem, string:inputtext[])
 	{
 		#pragma unused dialogID, listitem, inputtext
-		
+
 		if (!response)
 		{
 			return Y_HOOKS_CONTINUE_RETURN_0;
 		}
 
-		SetPlayerPos(playerID, fX, fY, fZ);
+		if (GetPlayerVehicleSeat(playerID) == 0)
+		{
+			SetVehiclePos(GetPlayerVehicleID(playerID), fX, fY, fZ);
+		}
+		else
+		{
+			SetPlayerPos(playerID, fX, fY, fZ);
+		}
+
 		SendClientMessage(playerID, X11_FOREST_GREEN, "You just teleported to the position you marked on map");
 	}
 
@@ -324,11 +332,11 @@ hook OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 	return Y_HOOKS_CONTINUE_RETURN_1;
 }
 
-ptask UpdatePlayerVehicleSpeed[100](playerid) 
+ptask UpdatePlayerVehicleSpeed[100](playerid)
 {
 	if (gSpeedoTextDraw[playerid][E_PLAYER_SPEEDOMETER_IS_SHOWN])
 	{
-		new 
+		new
 			Float:velX,
 			Float:velY,
 			Float:velZ,
@@ -419,7 +427,7 @@ YCMD:teleport(playerid, cmdtext[], help)
 	inline _response(playerID, dialogID, response, listitem, string:inputtext[])
 	{
 		#pragma unused dialogID, inputtext
-		
+
 		if (!response)
 		{
 			return 0;
@@ -744,7 +752,7 @@ YCMD:goto(playerid, cmdtext[], help)
 		}
 
 		Iter_Add(gPlayerTPRequests[pid], playerID);
-		
+
 		new requesterName[MAX_PLAYER_NAME + 1], requestedName[MAX_PLAYER_NAME + 1];
 		GetPlayerName(playerID, requesterName, sizeof(requesterName));
 		GetPlayerName(pid, requestedName, sizeof(requestedName));
@@ -807,10 +815,10 @@ YCMD:requests(playerid, cmdtext[], help)
 		x += 0.5;
 
 		GetPlayerName(sPlayerID, requesterName, sizeof(requesterName));
-		
+
 		va_SendClientMessage(playerID, X11_FOREST_GREEN, "You've accepted "CORAL"%s's "FOREST_GREEN"teleport request", requesterName);
 		va_SendClientMessage(sPlayerID, X11_FOREST_GREEN, ""CORAL"%s "FOREST_GREEN"has just accepted your teleport request", playerName);
-		
+
 		if (GetPlayerVehicleSeat(sPlayerID) == 0)
 		{
 			new const sPlayerVehicleID = GetPlayerVehicleID(sPlayerID);
@@ -862,7 +870,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_
 AddNewSpawn(const name[MAX_SPAWN_NAME], const Float:x, const Float:y, const Float:z, const Float:a)
 {
 	static index = 0;
-	
+
 	if (index == sizeof gServerSpawns)
 	{
 		print("[AddNewSpawn] couldn't exceed the limit of an array");
@@ -923,9 +931,9 @@ ShowCommandHelp(const playerid, const command[MAX_COMMAND_LENGTH])
 		printf("[ShowCommandHelp] couldn't show help for command \"%s\"; It might be not registered", command);
 		return 0;
 	}
-	
+
 	va_SendClientMessage(playerid, X11_SEA_GREEN_3, "> help section for the command - "CORAL"%s", command);
-	
+
 	if (isnull(cmd[E_COMMAND_ALIAS]))
 	{
 		SendClientMessage(playerid, X11_SEA_GREEN_3, "> does not have any alias");
