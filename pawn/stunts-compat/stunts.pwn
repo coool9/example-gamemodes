@@ -315,7 +315,7 @@ hook OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 			return Y_HOOKS_CONTINUE_RETURN_0;
 		}
 
-		if (GetPlayerVehicleSeat(playerid) == 0)
+		if (GetPlayerVehicleSeat(playerID) == 0)
 		{
 			SetVehiclePos(GetPlayerVehicleID(playerID), fX, fY, fZ);
 		}
