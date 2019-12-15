@@ -11,14 +11,11 @@
 	=======================================
 */
 
-#include <a_samp>
-
-#if defined MAX_PLAYERS
-	#undef MAX_PLAYERS
-#endif
 #define MAX_PLAYERS 32
 
 #define YSI_NO_HEAP_MALLOC
+
+#include <a_samp>
 
 #include <YSI_Server\y_scriptinit>
 #include <YSI_Visual\y_commands>
@@ -87,7 +84,7 @@ main()
 	print(" |                                     |");
 	print(" =======================================");
 	print("\n");
-	print(" > Asserting max players sort with defined MAX_PLAYERS");
+	print(" > Asserting MAX_PLAYERS definition and server's max players slot");
 	assert(GetMaxPlayers() == MAX_PLAYERS);
 	print(" > Assertion succeed");
 	print("\n");
