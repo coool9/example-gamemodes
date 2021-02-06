@@ -99,9 +99,9 @@ public OnMapUpdate()
     }
     else
     {
-	if(Current_Map == _:MAP_STADIUM)
+	if(Current_Map == E_MAPS)
         {
-            Current_Map = _:MAP_JEFFERSON;
+            Current_Map = 0;
         }
         else
         {
