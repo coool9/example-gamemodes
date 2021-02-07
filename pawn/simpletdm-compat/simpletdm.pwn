@@ -99,13 +99,9 @@ public OnMapUpdate()
     }
     else
     {
-	if(Current_Map == _:MAP_STADIUM)
+	if(Current_Map++ == E_MAPS)
         {
-            Current_Map = _:MAP_JEFFERSON;
-        }
-        else
-        {
-            Current_Map++;
+            Current_Map = 0;
         }
 		
         Map_Duration = 300;
